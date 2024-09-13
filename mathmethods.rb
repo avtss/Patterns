@@ -20,3 +20,14 @@ def sum_of_nonprime_dividers(num)
   end
   sum
 end
+def less_num_count(num)
+  c=0
+  copy=num
+  while copy>1
+    if copy%10<3
+      c+=1
+    end
+    copy/=10
+  end
+  return c
+end
