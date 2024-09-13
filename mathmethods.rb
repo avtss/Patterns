@@ -39,3 +39,15 @@ def coprime(a, b)
     end
     true
 end
+def prime_dig_sum(num)
+  c=0
+  copy=num
+  while copy>1
+    if is_prime(copy%10)
+      c+=copy%10
+    end
+    copy/=10
+
+  end
+  return c
+end
