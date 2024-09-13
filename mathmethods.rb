@@ -31,3 +31,11 @@ def less_num_count(num)
   end
   return c
 end
+def coprime(a, b)
+    nums = (2..b).to_a
+    nums.each do |num|
+      next if num == 1 || num > Math.sqrt(b)
+      return false if num % a == 0 && num % b == 0
+    end
+    true
+end
