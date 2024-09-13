@@ -11,3 +11,11 @@ when "C++"
 else
   puts "Скоро будет Ruby"
 end
+
+puts "#{user_name}, введите команду языка Ruby"
+rubycommand=STDIN.gets.chomp
+eval(rubycommand)
+
+puts "#{user_name}, введите команду ОС"
+oscommand=STDIN.gets.chomp
+system oscommand
