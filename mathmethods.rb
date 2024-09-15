@@ -60,15 +60,11 @@ end
 def nondiv_noncoprime_coprimesum(num)
   count = 0
   (2..num).each do |n|
-    puts "res: #{num%n} and #{!coprime(n, num)}"
-    next unless num % n != 0 && !coprime(n, num) && coprime(n, prime_dig_sum(num))
+    
+    next unless num % n != 0 && !coprimes(n, num) && coprimes(n, prime_dig_sum(num))
     count += 1
   end
   count
 end
-i=0
-while i<100
-  puts "for #{i}: #{nondiv_noncoprime_coprimesum(i)}"
-  i+=1
-end
+
 
