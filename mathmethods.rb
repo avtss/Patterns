@@ -31,19 +31,25 @@ def less_num_count(num)
   end
   return c
 end
-def coprime(a, b)
-    nums = (2..b).to_a
-    nums.each do |num|
-      next if num == 1 || num > Math.sqrt(b)
-      return false if num % a == 0 && num % b == 0
-    end
-    true
+def gcd(a, b)
+  a_copy = a
+  b_copy = b
+  while b_copy != 0
+    a_copy, b_copy = b_copy, a_copy % b_copy
+  end
+  a_copy
+end
+
+def coprimes(number1,number2)
+  divider=gcd(number1,number2)
+  if divider == 1 then return true end
+  return false
 end
 def prime_dig_sum(num)
   c=0
   copy=num
   while copy>1
-    if is_prime(copy%10)
+    if is_prime copy%10
       c+=copy%10
     end
     copy/=10
@@ -51,3 +57,18 @@ def prime_dig_sum(num)
   end
   return c
 end
+def nondiv_noncoprime_coprimesum(num)
+  count = 0
+  (2..num).each do |n|
+    puts "res: #{num%n} and #{!coprime(n, num)}"
+    next unless num % n != 0 && !coprime(n, num) && coprime(n, prime_dig_sum(num))
+    count += 1
+  end
+  count
+end
+i=0
+while i<100
+  puts "for #{i}: #{nondiv_noncoprime_coprimesum(i)}"
+  i+=1
+end
+
