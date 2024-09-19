@@ -35,3 +35,23 @@ def read(path)
 end
 
 
+if ARGV.size == 2
+  method=ARGV[0].to_i
+  file=ARGV[1]
+  array=read(file)
+  if method==1
+    puts "Минимальное значение в массиве: #{find_min(array)}"
+  end
+  if method==2
+    puts "Максимальное значение в массиве: #{find_max(array)}"
+  end
+  if method==3
+    ind=first_positive_found(array) + 1
+    puts "Первое положительное значение находится под индексом #{ind}"
+  end
+end
+if ARGV.size != 2
+  puts "Введите два аргумента"
+end
+
+
