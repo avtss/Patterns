@@ -24,10 +24,10 @@ def first_positive_found(ar)
 end
 def read(path)
   begin
-    file = File.open(path, "r")
-    ar = file.read.split.map(&:to_i)
-    file.close
-    ar
+    file = File.open(path, "r") do |file|
+      ar = file.read
+      ar.split.map(&:to_i)
+    end
   rescue => e
     puts "Ошибка при чтении файла: #{e.message}"
     []
