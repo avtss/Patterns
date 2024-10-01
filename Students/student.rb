@@ -15,3 +15,13 @@ class Student
 	def to_s
 		"ID: #{@id}, ФИО: #{@lastname} #{@firstname} #{surname}, номер телефона: #{@phone}, tg: #{@telegram}, email: #{@email}, github: #{@github}"
 	end
+	def display_info
+    	puts "Информация о студенте:"
+    	puts "ID: #{@id}"
+    	puts "ФИО: #{@lastname} #{@firstname} #{@surname}"
+    	puts "Телефон: #{@phone}"
+    	puts "Telegram: #{@telegram}"
+    	puts "Email: #{@email}"
+    	puts "GitHub: #{@github}"
+  	end
+end
