@@ -63,6 +63,15 @@ class Student
     	@telegram = username
   	end
 
+  	def no_contact?
+    	@phone.nil? && @telegram.nil? && @email.nil?
+  	end
+
+  	def validate
+    	raise ArgumentError, "Необходимо указать GitHub" if @github.nil?
+    	raise ArgumentError, "Необходимо указать хотя бы один контакт для связи" if no_contact?
+  	end
+
 	def initialize(id:, lastname:, firstname:, surname:, phone: nil, telegram: nil, email: nil, github: nil)
     	@id = id
     	self.lastname = lastname
