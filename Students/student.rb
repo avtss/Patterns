@@ -83,7 +83,13 @@ class Student
     	self.github = github
   	end
 	
-
+  	def set_contacts(phone: nil, telegram: nil, email: nil, github: nil)
+    	self.phone = phone if phone
+    	self.telegram = telegram if telegram
+    	self.email = email if email
+    	self.github = github if github
+  	end
+  	
 	def display_info
     	puts "Информация о студенте:"
     	puts "ID: #{@id}"
