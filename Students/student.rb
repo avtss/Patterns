@@ -90,15 +90,6 @@ class Student
     	self.github = github if github
   	end
   	
-	def display_info
-    	puts "Информация о студенте:"
-    	puts "ID: #{@id}"
-    	puts "ФИО: #{@lastname} #{@firstname} #{@surname}"
-    	puts "Телефон: #{@phone}" if @phone
-    	puts "Telegram: #{@telegram}" if @telegram
-    	puts "Email: #{@email}" if @email
-    	puts "GitHub: #{@github}" if @github
-  end
   def to_s
   	contact_info = []
   	contact_info << "Телефон: #{@phone}" if @phone
@@ -126,5 +117,36 @@ class Student
   	rescue ArgumentError => e
     	raise "Ошибка парсинга строки: #{e.message}"
   	end
+  end
+  def getInfo
+    initials = "#{@firstname[0]}. #{@surname[0]}."
+    contact_info = if @phone
+                     "Телефон: #{@phone}"
+                   elsif @telegram
+                     "Telegram: #{@telegram}"
+                   elsif @email
+                     "Email: #{@email}"
+                   else
+                     "Нет контактов"
+                   end
+
+    "#{@lastname} #{initials}; GitHub: #{@github}; #{contact_info}"
+  end
+  def fullname
+  	"#{@lastname}. #{@firstname[0]}. #{@surname[0]}"
+  end
+  def github
+    @github
+  end
+  def contact_method
+    if @phone
+      "Телефон: #{@phone}"
+    elsif @telegram
+      "Telegram: #{@telegram}"
+    elsif @email
+      "Email #{@email}"
+    else
+      "Нет контактов"
+    end
   end
 end
