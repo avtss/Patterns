@@ -32,3 +32,34 @@ def more_than_three_times
 	arr = gets.chomp.split.map(&:to_i)
 	result = arr.select {|x| arr.count(x) > 3}.uniq
 end
+
+loop do
+	puts "Выберите, что нужно выполнить:"
+	puts "1. Найти элементы, расположенные перед первым минимальным"
+	puts "2. Проверить, является ли элемент по указанному индексу локальным максимумом"
+	puts "3. Найти элементы меньше среднего арифметического"
+	puts "4. Найти элементы, встречающиеся более трех раз"
+	puts "0. Выход"
+	choice = gets.chomp.to_i
+
+	case choice
+	when 1
+		puts before_first_min
+
+	when 2
+		if local_max?
+			puts "Элемент под этим индексом является локальным максимумом"
+		else
+			puts "Элемент под этим индексом является локальным максимумом"
+		end
+	when 3
+		puts less_than_average
+	when 4
+		puts more_than_three_times
+	when 0
+		puts "Завершение программы"
+		break
+	else 
+		puts "Неправильное значение"
+	end
+end
