@@ -25,3 +25,10 @@ def less_than_average
 	average = arr.sum.to_f / arr.size
 	result = arr.select { |x| x<average}
 end
+
+# Поиск элементов, встречающихся более 3 раз
+def more_than_three_times
+	puts "Введите элементы массива через пробел"
+	arr = gets.chomp.split.map(&:to_i)
+	result = arr.select {|x| arr.count(x) > 3}.uniq
+end
