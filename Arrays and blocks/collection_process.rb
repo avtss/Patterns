@@ -16,4 +16,12 @@ def local_max?
 		return
 	end
 	result = arr[ind] > arr[ind-1] && arr[ind] > arr[ind+1]
+end
 
+# Поиск элементов меньше среднего арифметического
+def less_than_average
+	puts "Введите элементы массива через пробел"
+	arr = gets.chomp.split.map(&:to_i)
+	average = arr.sum.to_f / arr.size
+	result = arr.select { |x| x<average}
+end
