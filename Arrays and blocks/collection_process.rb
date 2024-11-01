@@ -5,4 +5,3 @@ def before_first_min
 	result = arr.take_while { |x| x!= arr.min }
 	puts "Элементы, находящиеся перед первым минимальным: #{result}"
 end
-before_first_min()
