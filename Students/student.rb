@@ -3,43 +3,49 @@ require_relative 'human'
 class Student < Human
   attr_reader :lastname, :firstname, :surname, :phone, :telegram, :email
 
+ 
   def initialize(id:, lastname:, firstname:, surname:, phone: nil, telegram: nil, email: nil, github: nil)
     @id = id
     @lastname = lastname
     @firstname = firstname
     @surname = surname
-    @phone = phone
-    @telegram = telegram
-    @email = email
+    set_contacts(phone: phone, telegram: telegram, email: email)
     @github = github
     validate
   end
 
-  
-  def validate
-    raise ArgumentError, "Необходимо указать GitHub" if @github.nil?
-    raise ArgumentError, "Необходимо указать хотя бы один контакт для связи" if no_contact?
+  def self.from_string(input)
+    info = input.split(';')
+    raise ArgumentError, "Неверное количество параметров" unless info.size >= 5
 
-    raise ArgumentError, "Некорректный телефон" if @phone && !self.class.valid_phone?(@phone)
-    raise ArgumentError, "Некорректный Telegram" if @telegram && !self.class.valid_telegram?(@telegram)
-    raise ArgumentError, "Некорректная почта" if @email && !self.class.valid_email?(@email)
-    raise ArgumentError, "Некорректное имя" if @name && !self.class.valid_name?(@name)
-    raise ArgumentError, "Некорректный Git" if @github && !self.class.valid_github?(@github)
+    id = info[0].strip.to_i
+    lastname = info[1].strip
+    firstname = info[2].strip
+    surname = info[3].strip
+    phone = info[4].strip.empty? ? nil : info[4].strip
+    telegram = info[5].strip.empty? ? nil : info[5].strip
+    email = info[6].strip.empty? ? nil : info[6].strip
+    github = info[7].strip.empty? ? nil : info[7].strip
+
+    new(id: id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github)
+  rescue ArgumentError => e
+    raise "Ошибка: #{e.message}"
   end
 
-  def get_info
-    initials = "#{@firstname[0]}. #{@surname[0]}."
-    contact_info = if @phone
-                     "Телефон: #{@phone}"
-                   elsif @telegram
-                     "Telegram: #{@telegram}"
-                   elsif @email
-                     "Email: #{@email}"
-                   else
-                     "Нет контактов"
-                   end
+  def to_s
+    contact_info = []
+    contact_info << "Телефон: #{@phone}" if @phone
+    contact_info << "Telegram: #{@telegram}" if @telegram
+    contact_info << "Email: #{@email}" if @email
+    contact_info << "GitHub: #{@github}" if @github
 
-    "#{@lastname} #{initials}; GitHub: #{@github}; #{contact_info}"
+    "Студент: #{@lastname} #{@firstname} #{@surname}, ID: #{@id}, Контакты: #{contact_info.join(', ')}"
+  end
+  
+ 
+
+  def has_contact?
+  	!@telegram.nil? || !@phone.nil? || !@email.nil?
   end
   #Сеттеры для всех полей:
   def lastname=(val)
@@ -77,10 +83,25 @@ class Student < Human
   end
 
   def set_contacts(phone: nil, telegram: nil, email: nil)
-    self.class.valid_phone?(phone) ? (@email = phone) : (raise ArgumentError, "Некорректный номер телефона")
-		self.class.valid_telegram?(telegram) ? (@telegram = telegram) : (raise ArgumentError, "Некорректный Telegram")
-		self.class.valid_email?(email) ? (@phone_number = email) : (raise ArgumentError, "Некорректный email")
+  if phone && self.class.valid_phone?(phone)
+    @phone = phone
+  elsif phone
+    raise ArgumentError, "Некорректный номер телефона"
   end
+
+  if telegram && self.class.valid_telegram?(telegram)
+    @telegram = telegram
+  elsif telegram
+    raise ArgumentError, "Некорректный Telegram"
+  end
+
+  if email && self.class.valid_email?(email)
+    @email = email
+  elsif email
+    raise ArgumentError, "Некорректный email"
+  end
+
+end
 
 
   def fullname
@@ -96,7 +117,7 @@ class Student < Human
     elsif @email
       "Email #{@email}"
     else
-      "Нет контактов"
+      ""
     end
   end
 end
