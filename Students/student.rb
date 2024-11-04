@@ -37,9 +37,8 @@ class Student < Human
     contact_info << "Телефон: #{@phone}" if @phone
     contact_info << "Telegram: #{@telegram}" if @telegram
     contact_info << "Email: #{@email}" if @email
-    contact_info << "GitHub: #{@github}" if @github
 
-    "Студент: #{@lastname} #{@firstname} #{@surname}, ID: #{@id}, Контакты: #{contact_info.join(', ')}"
+    "Студент: #{@lastname} #{@firstname} #{@surname}, ID: #{@id}, Контакты: #{contact_info.join(', ')}, GitHub: #{@github}"
   end
   
  
