@@ -108,16 +108,12 @@ end
   end
 
   
-  def contact_method
-    if @phone
-      "Телефон: #{@phone}"
-    elsif @telegram
-      "Telegram: #{@telegram}"
-    elsif @email
-      "Email #{@email}"
-    else
-      ""
-    end
+  def contact_info(phone, telegram, email)
+    contacts = []
+    contacts << "Телефон: #{phone}" unless phone.empty?
+    contacts << "Telegram: #{telegram}" unless telegram.empty?
+    contacts << "Email: #{email}" unless email.empty?
+    contacts.join(', ')
   end
 end
 
