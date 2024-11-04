@@ -1,40 +1,43 @@
 require_relative 'human'
+require_relative 'student'
 
 class Student_short < Human
-  attr_reader :surname_initials, :contact
-
+  attr_reader :lastname_initials, :contact
   def initialize(student)
-    super(student.id, lastname: student.lastname, firstname: student.firstname, surname: student.surname,
-          phone: student.phone, telegram: student.telegram, email: student.email, github: student.github)
-    @surname_initials = "#{student.lastname} #{student.firstname[0]}. #{student.surname[0]}."
-    @contact = get_contact(student)
+    @id=student.id 
+    @github=student.github
+    @lastname_initials = student.fullname
+    @contact = student.contact_info
   end
 
-  def get_contact(student)
+ #Фамилия;Имя;Отчество;Git;Телефон;Тг;Email  
+  def self.from_string(id, input)
+    info = input.split(';')
+    raise ArgumentError, "Неверное количество параметров" unless info.size >= 5
+
+    lastname = info[0].strip
+    firstname = info[1].strip
+    surname = info[2].strip
+    github = info[3].strip
+    phone = info[4]&.strip
+    telegram = info[5]&.strip
+    email = info[6]&.strip
+    student=Student.new(id: id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github)
+    new(student)
+
+  end
+  
+  def self.short_contact(phone, telegram, email)
     contacts = []
-    contacts << "Телефон: #{student.phone}" if student.phone
-    contacts << "Telegram: #{student.telegram}" if student.telegram
-    contacts << "Email: #{student.email}" if student.email
-
-    contacts.empty? ? "Нет контактов" : contacts.join(', ')
+    contacts << "Телефон: #{phone}" unless phone.empty?
+    contacts << "Telegram: #{telegram}" unless telegram.empty?
+    contacts << "Email: #{email}" unless email.empty?
+    contacts.join(', ')
   end
-
-  def initialize_from_string(id, input)
-    parts = input.split(';')
-    raise ArgumentError, "Неверное количество параметров" unless parts.size >= 3
-
-    lastname, firstname, surname, github, phone, telegram, email = parts.map(&:strip)
-    super(id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github)
-    @surname_initials = "#{lastname} #{firstname[0]}. #{surname[0]}."
-    @contact = contact_info(phone, telegram, email)
-  end
-
-  def contact_info(phone, telegram, email)
-    contacts = []
-    contacts << "Телефон: #{phone}" if phone && !phone.empty?
-    contacts << "Telegram: #{telegram}" if telegram && !telegram.empty?
-    contacts << "Email: #{email}" if email && !email.empty?
-
-    contacts.empty? ? "Нет контактов" : contacts.join(', ')
-  end
+  
+  def to_s
+    "ФИО: #{@lastname_initials}, ID: #{@id}, Git: #{@github}, контакты: #{@contact}"
+   end
+  
+  
 end
