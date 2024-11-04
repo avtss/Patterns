@@ -108,11 +108,11 @@ end
   end
 
   
-  def contact_info(phone, telegram, email)
+  def contact_info()
     contacts = []
-    contacts << "Телефон: #{phone}" unless phone.empty?
-    contacts << "Telegram: #{telegram}" unless telegram.empty?
-    contacts << "Email: #{email}" unless email.empty?
+    contacts << "Телефон: #{@phone}" unless phone.empty?
+    contacts << "Telegram: #{@telegram}" unless telegram.empty?
+    contacts << "Email: #{@email}" unless email.empty?
     contacts.join(', ')
   end
 end
