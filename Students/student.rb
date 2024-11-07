@@ -11,7 +11,6 @@ class Student < Human
     @surname = surname
     set_contacts(phone: phone, telegram: telegram, email: email)
     @github = github
-    validate
   end
 
   def self.from_string(input)
@@ -43,9 +42,7 @@ class Student < Human
   
  
 
-  def has_contact?
-  	!@telegram.nil? || !@phone.nil? || !@email.nil?
-  end
+  
   #Сеттеры для всех полей:
   def lastname=(val)
 		if self.class.valid_name?(val)
