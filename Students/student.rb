@@ -115,6 +115,8 @@ end
     contacts << "Email: #{@email}" unless email.empty?
     contacts.join(', ')
   end
+
+  private_class_method :new
 end
 
 
