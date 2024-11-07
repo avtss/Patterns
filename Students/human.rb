@@ -5,14 +5,32 @@ class Human
 		self.id = id if id
     self.github = github if github
 	end
-    
+
   GITHUB_REGEX = /^https?:\/\/github\.com\/[a-zA-Z0-9_-]+$/
   PHONE_REGEX = /^\+7\d{10}$/
   NAME_REGEX = /^[А-ЯЁ][а-яё]+\s*$/
   EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   TELEGRAM_REGEX = /^@\w{5,}$/
   
-  
+  private def github=(val)
+    if self.class.valid_github?(val)
+      @github=val
+    else
+      raise ArgumentError, "Некорректный Git"
+    end
+  end
+
+  private def id=(val)
+    if self.class.valid_id?(val)
+      @id = val
+    else
+      raise ArgumentError, "Некорректный ID"
+    end
+  end
+
+  def self.valid_id?(id)
+		id.is_a?(Integer) && id > 0
+	end
 
   def self.valid_github?(github)
     github =~ GITHUB_REGEX
@@ -45,6 +63,4 @@ class Human
   def validate
     has_contact? && has_git?   
   end
-
-
 end
