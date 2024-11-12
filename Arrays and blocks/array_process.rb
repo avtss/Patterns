@@ -34,5 +34,14 @@ class ArrayProcessor
 		  sorted_array.sort!
 		end
 		sorted_array
-	  end
+	end
+
+	def max
+		max_element = arr.first
+		arr.each do |element|
+		  comparison = block_given? ? yield(max_element, element) : (max_element <=> element)
+		  max_element = element if comparison == -1
+		end
+		max_element
+	end
 end
