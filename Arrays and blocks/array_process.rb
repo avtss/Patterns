@@ -44,4 +44,21 @@ class ArrayProcessor
 		end
 		max_element
 	end
+
+	def drop_while
+		result = []
+		dropping = true
+		arr.each do |element|
+		  if dropping && yield(element)
+			next
+		  else
+			dropping = false
+			result << element
+		  end
+		end
+		result
+	  end
 end
+processor = ArrayProcessor.new([5, 12, 18, 30, 31, 19, 7])
+result = processor.drop_while { |x| x < 20 }
+puts result.inspect
