@@ -25,4 +25,14 @@ class ArrayProcessor
 		end
 		result
 	end
+
+	def sort
+		sorted_array = arr.dup
+		if block_given?
+		  sorted_array.sort! { |a, b| yield(a, b) }
+		else
+		  sorted_array.sort!
+		end
+		sorted_array
+	  end
 end
