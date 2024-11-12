@@ -59,6 +59,3 @@ class ArrayProcessor
 		result
 	  end
 end
-processor = ArrayProcessor.new([5, 12, 18, 30, 31, 19, 7])
-result = processor.drop_while { |x| x < 20 }
-puts result.inspect
