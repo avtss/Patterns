@@ -9,10 +9,19 @@ class ArrayProcessor
 		  return element if yield(element)
 		end
 	end
+
 	def map
 		result = []
 		arr.each do |element|
 		  result << yield(element)
+		end
+		result
+	end
+
+	def select
+		result = []
+		arr.each do |element|
+		  result << element if yield(element)
 		end
 		result
 	end
