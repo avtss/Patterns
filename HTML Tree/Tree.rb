@@ -37,3 +37,28 @@ class Tree
 	    end
 	end
 end
+
+class Node
+	attr_accessor :value, :children
+  
+	def initialize(value)
+	  @value = value
+	  @children = []
+	end
+  
+	def add_child(node)
+	  @children << node
+	end
+
+	def to_s
+		@value
+	end
+end
+root = Node.new(1)
+tree = Tree.new(root)
+
+tree.add_child(Node.new(2), root)
+tree.add_child(Node.new(3), root)
+tree.bfs do |node|
+	puts node.to_s
+end
