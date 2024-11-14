@@ -1,3 +1,5 @@
+require "./HTMLTag.rb"
+
 class Tree
 	include Enumerable
 
@@ -36,6 +38,14 @@ class Tree
 	    	current_node.children.reverse.each { |child| stack.push(child) } 
 	    end
 	end
+
+	def each(&block)
+		bfs_each(&block)
+	end
+
+	def to_html
+		@root.to_s
+	end
 end
 
 class Node
@@ -54,11 +64,15 @@ class Node
 		@value
 	end
 end
-root = Node.new(1)
-tree = Tree.new(root)
+#html = HtmlTag.new(tag_name: "html")
+#body = HtmlTag.new(tag_name: "body")
+#div = HtmlTag.new(tag_name: "div", attributes: { class: "container" })
+#p = HtmlTag.new(tag_name: "p", content: "Hello, World!")
 
-tree.add_child(Node.new(2), root)
-tree.add_child(Node.new(3), root)
-tree.bfs do |node|
-	puts node.to_s
-end
+#html_tree = Tree.new(html)
+#html_tree.add_child(body, html)
+#html_tree.add_child(div, body)
+#html_tree.add_child(p, div)
+
+#puts "HTML Tree:"
+#puts html_tree.to_html
