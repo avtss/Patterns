@@ -1,19 +1,20 @@
 require_relative 'human'
 
 class Student < Human
-  attr_reader :lastname, :firstname, :surname, :phone, :telegram, :email
+  attr_reader :lastname, :firstname, :surname, :phone, :telegram, :email, :birth_date
 
-  def initialize(lastname:, firstname:, surname:, id: nil, phone: nil, telegram: nil, email: nil, github: nil)
+  def initialize(lastname:, firstname:, surname:, id: nil, phone: nil, telegram: nil, email: nil, github: nil, birth_date: nil)
     self.lastname = lastname
     self.firstname = firstname
     self.surname = surname
+    self.birth_date = birth_date if birth_date
     set_contacts(phone: phone, telegram: telegram, email: email)
     super(id: id, github: github)
   end
 
   def self.from_string(input)
     info = input.split(';')
-    raise ArgumentError, "Неверное количество параметров" unless info.size >= 5
+    raise ArgumentError, "Неверное количество параметров" unless info.size >= 8
     id = info[0].strip.to_i
     lastname = info[1].strip
     firstname = info[2].strip
@@ -22,7 +23,8 @@ class Student < Human
     telegram = info[5].strip.empty? ? nil : info[5].strip
     email = info[6].strip.empty? ? nil : info[6].strip
     github = info[7].strip.empty? ? nil : info[7].strip
-    new(id: id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github)
+    birth_date = info[8].strip.empty? ? nil : info[8]
+    new(id: id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github, birth_date: birth_date)
   rescue ArgumentError => e
     raise "Ошибка: #{e.message}"
   end
@@ -32,8 +34,9 @@ class Student < Human
     contact_info << "телефон: #{@phone}" if @phone
     contact_info << "telegram: #{@telegram}" if @telegram
     contact_info << "email: #{@email}" if @email
+    birth_info = "дата рождения: #{@birth_date}" if @birth_date
 
-    "Студент: #{@lastname} #{@firstname} #{@surname}, ID: #{@id}, #{contact_info.join(', ')}, GitHub: #{@github}"
+    "Студент: #{@lastname} #{@firstname} #{@surname}, ID: #{@id}, #{birth_info}, #{contact_info.join(', ')}, GitHub: #{@github}"
   end
   
   def lastname=(val)
@@ -59,6 +62,14 @@ class Student < Human
 			raise ArgumentError, "Некорректное отчество"
 		end
 	end
+
+  def birth_date=(val)
+    if self.class.valid_birthdate?(val)
+      @birth_date = val
+    else
+      raise ArgumentError, "Некорректная дата рождения. Ожидаемый формат: ДД.ММ.ГГГГ"
+    end
+  end
 
   def set_contacts(phone: nil, telegram: nil, email: nil)
     if phone && self.class.valid_phone?(phone)

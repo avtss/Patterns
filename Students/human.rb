@@ -11,6 +11,7 @@ class Human
   NAME_REGEX = /^[А-ЯЁ][а-яё]+\s*$/
   EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   TELEGRAM_REGEX = /^@\w{5,}$/
+  BIRTHDATE_REGEX = /\A(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})\z/
   
   private def github=(val)
     if self.class.valid_github?(val)
@@ -51,6 +52,10 @@ class Human
   def self.valid_telegram?(telegram)
     telegram =~ TELEGRAM_REGEX 
   end
+
+  def self.valid_birthdate?(birthdate)
+		birthdate =~ BIRTHDATE_REGEX
+	end
 
   def has_contact?
   	!@telegram.nil? || !@phone.nil? || !@email.nil?
