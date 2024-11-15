@@ -19,6 +19,10 @@ class StudentTree
 		end
 	end
 
+    def each(&block)
+		traversal(@root, &block)
+	end
+
     private 
 
 	def insert_node(node, student)
@@ -36,6 +40,15 @@ class StudentTree
       		end
     	end
 	end
+
+    #Обход дерева начиная с узла node
+  	def traversal(node, &block)
+    	return if node.nil?
+
+    	traversal(node.left, &block)
+    	yield(node.student)
+    	traversal(node.right, &block)
+    end
 end
 
 class Node
