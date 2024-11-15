@@ -5,6 +5,12 @@ class Student < Human
 
   attr_reader :lastname, :firstname, :surname, :phone, :telegram, :email, :birth_date
 
+  PHONE_REGEX = /^\+7\d{10}$/
+  NAME_REGEX = /^[А-ЯЁ][а-яё]+\s*$/
+  EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  TELEGRAM_REGEX = /^@\w{5,}$/
+  BIRTHDATE_REGEX = /\A(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})\z/
+
   def initialize(lastname:, firstname:, surname:, id: nil, phone: nil, telegram: nil, email: nil, github: nil, birth_date: nil)
     self.lastname = lastname
     self.firstname = firstname
@@ -41,6 +47,26 @@ class Student < Human
     "Студент: #{@lastname} #{@firstname} #{@surname}, ID: #{@id}, #{birth_info}, #{contact_info.join(', ')}, GitHub: #{@github}"
   end
   
+  def self.valid_phone?(phone)
+    phone =~ PHONE_REGEX
+  end
+
+  def self.valid_name?(name)
+    name =~ NAME_REGEX && !name.nil?
+  end
+
+  def self.valid_email?(email)
+    email =~ EMAIL_REGEX 
+  end
+
+  def self.valid_telegram?(telegram)
+    telegram =~ TELEGRAM_REGEX 
+  end
+
+  def self.valid_birthdate?(birthdate)
+		birthdate =~ BIRTHDATE_REGEX
+	end
+
   def lastname=(val)
 		if self.class.valid_name?(val)
 			@lastname = val
@@ -93,6 +119,14 @@ class Student < Human
     end
   end
 
+  def has_contact?
+  	!@telegram.nil? || !@phone.nil? || !@email.nil?
+  end
+
+  def validate
+    has_contact? && has_git?   
+  end
+  
   def fullname
     "#{@lastname} #{@firstname[0]}.#{@surname[0]}."
   end

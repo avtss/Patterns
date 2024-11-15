@@ -5,14 +5,9 @@ class Human
 		self.id = id if id
     self.github = github if github
 	end
-
-  GITHUB_REGEX = /^https?:\/\/github\.com\/[a-zA-Z0-9_-]+$/
-  PHONE_REGEX = /^\+7\d{10}$/
-  NAME_REGEX = /^[А-ЯЁ][а-яё]+\s*$/
-  EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  TELEGRAM_REGEX = /^@\w{5,}$/
-  BIRTHDATE_REGEX = /\A(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})\z/
   
+  GITHUB_REGEX = /^https?:\/\/github\.com\/[a-zA-Z0-9_-]+$/
+
   private def github=(val)
     if self.class.valid_github?(val)
       @github=val
@@ -38,27 +33,27 @@ class Human
   end
 
   def self.valid_phone?(phone)
-    phone =~ PHONE_REGEX
+    raise NotImplementedError, "Метод не реализован в классе Human"
   end
 
   def self.valid_name?(name)
-    name =~ NAME_REGEX && !name.nil?
+    raise NotImplementedError, "Метод не реализован в классе Human"
   end
 
   def self.valid_email?(email)
-    email =~ EMAIL_REGEX 
+    raise NotImplementedError, "Метод не реализован в классе Human"
   end
 
   def self.valid_telegram?(telegram)
-    telegram =~ TELEGRAM_REGEX 
+    raise NotImplementedError, "Метод не реализован в классе Human" 
   end
 
   def self.valid_birthdate?(birthdate)
-		birthdate =~ BIRTHDATE_REGEX
+		raise NotImplementedError, "Метод не реализован в классе Human"
 	end
 
   def has_contact?
-  	!@telegram.nil? || !@phone.nil? || !@email.nil?
+  	raise NotImplementedError, "Метод не реализован в классе Human"
   end
 
   def has_git?
@@ -66,6 +61,6 @@ class Human
   end
 
   def validate
-    has_contact? && has_git?   
+    raise NotImplementedError, "Метод не реализован в классе Human"   
   end
 end
