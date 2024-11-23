@@ -5,4 +5,20 @@ class Data_table
     end
     @data = data
   end
+
+  def get_element(num_of_row,num_of_column)
+    @data[num_of_row][num_of_column]
+  end
+  
+  def count_of_rows
+    @data.count
+  end
+
+  def count_of_columns
+    @data[0].count
+  end
+
+  def to_s 
+    @data.inspect
+  end
 end
