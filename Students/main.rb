@@ -46,7 +46,7 @@ begin
   list_student_short.select(2)
   puts "Выбранные: #{list_student_short.get_selected}" 
 
-
+  puts list_student_short.get_names
   # Получаем данные
   puts "Таблица выбранных студентов:"
   table = list_student_short.get_data
