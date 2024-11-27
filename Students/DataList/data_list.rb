@@ -4,9 +4,29 @@ class Data_list
         self.data = elements
     end
 
+    def select(number)
+        element = self.data[number]
+        if element && !self.selected.include?(element.id)
+            self.selected << element.id
+        end
+    end
+
+    def get_selected
+        self.selected.dup
+    end
+
+    def get_names
+        raise NotImplementedError, "Метод не реализован в классе Data_list"
+    end
+
+    def get_data
+        raise NotImplementedErroe, "Метод не реализован в классе Data_list"
+    end
+
     private
 
     attr_reader :data
+    attr_accessor :selected
     
     def data=(data)
         @data = data.map { |element| deep_dup(element) }
