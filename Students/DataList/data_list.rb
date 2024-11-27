@@ -2,6 +2,7 @@ class Data_list
 
     def initialize(elements)
         self.data = elements
+        @selected=[]
     end
 
     def select(number)
