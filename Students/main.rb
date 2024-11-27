@@ -28,11 +28,11 @@ begin
   #puts data_table.get_element(1, 2)
   #puts data_table.row_count
 
-  data_list = Data_list.new([student1, student2, student3])
-  data_list.select(0) 
-  puts "Выбранные: #{data_list.get_selected}"
-  data_list.select(2)
-  puts "Выбранные: #{data_list.get_selected}"
+  #data_list = Data_list.new([student1, student2, student3])
+  #data_list.select(0) 
+  #puts "Выбранные: #{data_list.get_selected}"
+  #data_list.select(2)
+  #puts "Выбранные: #{data_list.get_selected}"
   
   
   list_student_short = Data_list_student_short.new([studentshort1, studentshort2, studentshort3])

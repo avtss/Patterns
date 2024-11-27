@@ -17,14 +17,28 @@ class Data_list
     end
 
     def get_names
-        raise NotImplementedError, "Метод не реализован в классе Data_list"
+        column_names
     end
 
     def get_data
-        raise NotImplementedErroe, "Метод не реализован в классе Data_list"
+        result = [self.get_names]
+        index = 1
+        selected.each do |selected_index|
+          obj = self.data[selected_index]
+          row = build_row(index, obj)
+          result << row
+          index += 1
+        end
+        Data_table.new(result)
     end
 
     private
+
+    def column_names
+        raise NotImplementedError, "Метод не реализован в классе Data_list"
+    end
+
+    protected
 
     attr_reader :data
     attr_accessor :selected
