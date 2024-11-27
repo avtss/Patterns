@@ -1,6 +1,9 @@
 require_relative 'student'
 require_relative 'student_short'
 require_relative 'human'
+require_relative './DataList/data_list'
+require_relative './DataList/data_table'
+require_relative './DataList/data_list_student_short.rb'
 
 begin
   student1 = Student.new(id: 1, lastname: 'Иванов', firstname: 'Иван', surname: 'Иванович', phone: '+71234567890', email: 'ivan@example.com', telegram: '@ivadsadasn', github: 'https://github.com/ivanov', birth_date: '11.03.2004')
@@ -9,14 +12,28 @@ begin
   puts student2
   student3 = Student.new(id: 3, lastname: 'Сидоров', firstname: 'Сидор', surname: 'Сидорович', phone: '+74951234567', email: 'sidor@example.com', github: 'https://github.com/sidorov')
   puts student3
-  student4 = Student.from_string("4;Иванов;Иван;Иванович;+79998887700;@ivanov;ivanov@example.com;https://github.com/ivanov;05.08.2003")
-  puts student4
+  #student4 = Student.from_string("4;Иванов;Иван;Иванович;+79998887700;@ivanov;ivanov@example.com;https://github.com/ivanov;05.08.2003")
+  #puts student4
 
   #Фамилия И.О., https://github.com/example, contact   
-  studentshort1=Student_short.from_string(5, "Петров П.В., https://github.com/avtss, +79991234567")
-  puts studentshort1
-  studentshort2=Student_short.from_student(student1)
-  puts studentshort2
+  #studentshort1=Student_short.from_string(5, "Петров П.В., https://github.com/avtss, +79991234567")
+  #puts studentshort1
+  #studentshort2=Student_short.from_student(student1)
+  #puts studentshort2
+
+  data_table=Data_table.new([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+  puts data_table.get_element(0, 0)
+  puts data_table.get_element(1, 2)
+  puts data_table.row_count
+
+  data_list = Data_list.new([student1, student2, student3])
+  data_list.inspect
+  data_list.select(2) 
+  puts "Выбранные: #{data_list.get_selected}"
+  data_list.select(1)
+  puts "Выбранные: #{data_list.get_selected}"
+
+
 rescue ArgumentError => e
   puts e.message
 end
