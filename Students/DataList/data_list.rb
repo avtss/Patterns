@@ -8,7 +8,7 @@ class Data_list
     def select(number)
         element = self.data[number]
         if element && !self.selected.include?(element.id)
-            self.selected << element.id
+            self.selected << number
         end
     end
 
