@@ -16,7 +16,7 @@ class Human
     end
   end
 
-  private def id=(val)
+  def id=(val)
     if self.class.valid_id?(val)
       @id = val
     else

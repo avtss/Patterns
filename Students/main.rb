@@ -36,21 +36,23 @@ begin
   
   
   list_student_short = Data_list_student_short.new([studentshort1, studentshort2, studentshort3])
-  # Тестируем выбор студентов
-  list_student_short.select(0) 
-  puts "Выбранные: #{list_student_short.get_selected}"
 
-  list_student_short.select(1) 
-  puts "Выбранные: #{list_student_short.get_selected}" 
+# Тестируем выбор студентов
+list_student_short.select(0)
+puts "Выбранные: #{list_student_short.get_selected}"
 
-  list_student_short.select(2)
-  puts "Выбранные: #{list_student_short.get_selected}" 
+list_student_short.select(1)
+puts "Выбранные: #{list_student_short.get_selected}"
 
-  puts list_student_short.get_names
-  # Получаем данные
-  puts "Таблица выбранных студентов:"
-  table = list_student_short.get_data
-  puts table.to_s
+list_student_short.select(2)
+puts "Выбранные: #{list_student_short.get_selected}"
+
+puts list_student_short.get_names
+
+# Получаем данные
+puts "Таблица выбранных студентов:"
+table = list_student_short.get_data
+puts table.to_s
   
 
 rescue ArgumentError => e

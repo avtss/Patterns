@@ -1,13 +1,35 @@
 [
-    {
-      "id": 1,
-      "lastname": "Иванов",
-      "firstname": "Иван",
-      "surname": "Иванович",
-      "phone": "+79111111111",
-      "telegram": "@ivannnni",
-      "email": "ivanov@example.com",
-      "github": "https://github.com/ivanov",
-      "birth_date": "01.01.2000"
-    }
+  {
+    "id": 1,
+    "lastname": "Иванов",
+    "firstname": "Иван",
+    "surname": "Иванович",
+    "phone": "+79111111111",
+    "telegram": "@ivannnni",
+    "email": "ivanov@example.com",
+    "github": "https://github.com/ivanov",
+    "birth_date": "01.01.2000"
+  },
+  {
+    "id": 2,
+    "lastname": "Петров",
+    "firstname": "Петр",
+    "surname": "Петрович",
+    "phone": "+79222222222",
+    "telegram": "@petrrrrrr",
+    "email": "petrov@example.com",
+    "github": "https://github.com/petrov",
+    "birth_date": "02.02.2002"
+  },
+  {
+    "id": 3,
+    "lastname": "Сидоров",
+    "firstname": "Сидор",
+    "surname": "Сидорович",
+    "phone": "+79333333333",
+    "telegram": "@sidorrrrr",
+    "email": "sidorov@example.com",
+    "github": "https://github.com/sidorov",
+    "birth_date": "03.03.2003"
+  }
 ]
