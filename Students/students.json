@@ -1,0 +1,13 @@
+[
+    {
+      "id": 1,
+      "lastname": "Иванов",
+      "firstname": "Иван",
+      "surname": "Иванович",
+      "phone": "+79111111111",
+      "telegram": "@ivannnni",
+      "email": "ivanov@example.com",
+      "github": "https://github.com/ivanov",
+      "birth_date": "01.01.2000"
+    }
+]
