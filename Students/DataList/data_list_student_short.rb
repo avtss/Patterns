@@ -11,8 +11,6 @@ class Data_list_student_short < Data_list
     private
 
     def build_row(index, obj)
-        row=[index, obj.lastname_initials, obj.github, obj.contact]
-        puts "Сформированная строка: #{row.inspect}"
-        row
+        [index, obj.lastname_initials, obj.github, obj.contact]
     end
 end
