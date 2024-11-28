@@ -1,6 +1,6 @@
 class Data_list
 
-    def initialize(elements, column_names)
+    def initialize(elements)
         @column_names = column_names
         self.data = elements
         @selected=[]
@@ -35,6 +35,10 @@ class Data_list
 
     private
 
+    def column_names
+        raise NotImplementedError, "Метод не реализован в классе Data_list"
+    end
+    
     def build_row(index, element)
         raise NotImplementedError, "Метод не реализован в классе Data_list"
     end
