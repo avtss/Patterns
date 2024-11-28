@@ -40,7 +40,7 @@ class Tree
 	end
 
 	def each(&block)
-		bfs_each(&block)
+		bfs(&block)
 	end
 
 	def to_html
@@ -76,3 +76,9 @@ end
 
 #puts "HTML Tree:"
 #puts html_tree.to_html
+
+#result = html_tree.map { |node| node.to_s }
+#puts "Mapped values: #{result.inspect}"
+
+#div_nodes = html_tree.select { |node| node.tag_name == "div" }
+#puts "Nodes with tag <div>: #{div_nodes.map(&:to_s)}"
