@@ -5,8 +5,8 @@ class Tree
 
 	attr_accessor :root
 
-	def initialize(root = nil)
-		@root = root
+	def initialize(html_document = nil)
+		@root = parse_html(html_document) if html_document
 	end
 
 	def add_child(node, parent = nil)
@@ -46,6 +46,62 @@ class Tree
 	def to_html
 		@root.to_s
 	end
+
+	private
+
+	def divide_tags(html)
+		html.scan(/<[^>]+>|[^<]+/)
+	end
+
+	def parse_html(html)
+		tags = divide_tags(html) 
+		build_tree(tags)      
+	end
+
+	def build_tree(divided_tags)
+		stack = []
+		root = nil
+	
+		divided_tags.each do |divided_tag|
+		  if divided_tag.start_with?('<') && !divided_tag.start_with?('</')
+			tag_name, attributes = parse_tag(divided_tag)
+			tag = HtmlTag.new(tag_name: tag_name, attributes: attributes)
+	
+			if stack.any?
+			  stack.last.add_child(tag)
+			else
+			  root = tag
+			end
+	
+			unless divided_tag.end_with?('/>')
+			  stack.push(tag)
+			end
+		  elsif divided_tag.start_with?('</')
+			stack.pop
+		  else
+			next if divided_tag.strip.empty?
+			stack.last.content = divided_tag.strip if stack.any?
+		  end
+		end
+	
+		root
+	  end
+
+	  def parse_tag(tag)
+		tag.match(/<(\w+)(.*?)>/) do |match|
+		  tag_name = match[1]
+		  attributes = parse_attributes(match[2])
+		  return [tag_name, attributes]
+		end
+	  end
+
+	  def parse_attributes(attributes_string)
+		attributes = {}
+		attributes_string.scan(/(\w+)=['"](.*?)['"]/) do |key, value|
+		  attributes[key] = value
+		end
+		attributes
+	  end
 end
 
 class Node
@@ -64,21 +120,14 @@ class Node
 		@value
 	end
 end
-#html = HtmlTag.new(tag_name: "html")
-#body = HtmlTag.new(tag_name: "body")
-#div = HtmlTag.new(tag_name: "div", attributes: { class: "container" })
-#p = HtmlTag.new(tag_name: "p", content: "Hello, World!")
-
-#html_tree = Tree.new(html)
-#html_tree.add_child(body, html)
-#html_tree.add_child(div, body)
-#html_tree.add_child(p, div)
-
-#puts "HTML Tree:"
-#puts html_tree.to_html
-
-#result = html_tree.map { |node| node.to_s }
-#puts "Mapped values: #{result.inspect}"
-
-#div_nodes = html_tree.select { |node| node.tag_name == "div" }
-#puts "Nodes with tag <div>: #{div_nodes.map(&:to_s)}"
+tree = Tree.new(
+'<html>
+  <body>
+    <div class="container">
+      <p id="greeting">Hello, World!</p>
+      <p>Test</p>
+    </div>
+  </body>
+</html>'
+)
+puts tree.to_html
