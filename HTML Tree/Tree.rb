@@ -120,14 +120,3 @@ class Node
 		@value
 	end
 end
-tree = Tree.new(
-'<html>
-  <body>
-    <div class="container">
-      <p id="greeting">Hello, World!</p>
-      <p>Test</p>
-    </div>
-  </body>
-</html>'
-)
-puts tree.to_html
