@@ -103,20 +103,3 @@ class Tree
 		attributes
 	  end
 end
-
-class Node
-	attr_accessor :value, :children
-  
-	def initialize(value)
-	  @value = value
-	  @children = []
-	end
-  
-	def add_child(node)
-	  @children << node
-	end
-
-	def to_s
-		@value
-	end
-end
