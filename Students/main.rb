@@ -1,7 +1,11 @@
 require_relative 'student'
 require_relative 'student_short'
 require_relative 'human'
+<<<<<<< HEAD
 require_relative 'student_tree'
+=======
+require_relative 'students_list_json'
+>>>>>>> f117df692eb5dde994c0f0f5b6b16633bde323a0
 require_relative './DataList/data_list'
 require_relative './DataList/data_table'
 require_relative './DataList/data_list_student_short.rb'
@@ -67,6 +71,18 @@ tree.each { |student| puts student }
 student = tree.find { |s| s.birth_date == "12.11.2001" }
 puts student
 
+puts "Таблица выбранных студентов:"
+table = list_student_short.get_data
+puts table.to_s
+
+listjson = Students_list_JSON.new('students.json')
+
+puts listjson.sort_by_fullname
+
+puts listjson.count
+
+puts listjson.get_k_n_student_short_list(0, 2).get_data
+  
 
 rescue ArgumentError => e
   puts e.message
