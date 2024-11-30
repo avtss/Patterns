@@ -1,6 +1,7 @@
 require_relative 'student'
 require_relative 'student_short'
 require_relative 'human'
+require_relative 'students_list_json'
 require_relative './DataList/data_list'
 require_relative './DataList/data_table'
 require_relative './DataList/data_list_student_short.rb'
@@ -53,6 +54,14 @@ puts list_student_short.get_names
 puts "Таблица выбранных студентов:"
 table = list_student_short.get_data
 puts table.to_s
+
+listjson = Students_list_JSON.new('students.json')
+
+puts listjson.sort_by_fullname
+
+puts listjson.count
+
+puts listjson.get_k_n_student_short_list(0, 2).get_data
   
 
 rescue ArgumentError => e
