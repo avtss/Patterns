@@ -138,8 +138,8 @@ class Student < Human
   end
 
   def <=>(other)
-    day1, month1, year1 = @birthdate.split('.').map(&:to_i)
-    day2, month2, year2 = other.birthdate.split('.').map(&:to_i)
+    day1, month1, year1 = @birth_date.split('.').map(&:to_i)
+    day2, month2, year2 = other.birth_date.split('.').map(&:to_i)
 
     [year1, month1, day1] <=> [year2, month2, day2]
   end
