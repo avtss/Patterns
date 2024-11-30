@@ -3,6 +3,7 @@ require_relative 'student_short'
 require_relative 'human'
 require_relative 'student_tree'
 require_relative 'students_list_json'
+require_relative 'students_list_yaml'
 require_relative './DataList/data_list'
 require_relative './DataList/data_table'
 require_relative './DataList/data_list_student_short.rb'
@@ -56,30 +57,37 @@ begin
 #table = list_student_short.get_data
 #puts table.to_s
 
-tree = StudentTree.new
+#tree = StudentTree.new
 
-tree.insert(student1)
-tree.insert(student2)
-tree.insert(student3)
+#tree.insert(student1)
+#tree.insert(student2)
+#tree.insert(student3)
 
-tree.each { |student| puts student }
-
-
-student = tree.find { |s| s.birth_date == "12.11.2001" }
-puts student
-
-tree = StudentTree.new
-
-tree.insert(student1)
-tree.insert(student2)
-tree.insert(student3)
-
-tree.each { |student| puts student }
+#tree.each { |student| puts student }
 
 
-student = tree.find { |s| s.birth_date == "12.11.2001" }
-puts student
+#student = tree.find { |s| s.birth_date == "12.11.2001" }
+#puts student
 
+#tree = StudentTree.new
+
+#tree.insert(student1)
+#tree.insert(student2)
+#tree.insert(student3)
+
+#tree.each { |student| puts student }
+
+
+#student = tree.find { |s| s.birth_date == "12.11.2001" }
+#puts student
+
+
+students_list = Students_list_YAML.new('students.yaml')
+#students_list.add_student(student3)
+
+puts "Количество студентов: #{students_list.count}"
+
+puts "Отсортированные по имени: #{students_list.sort_by_fullname}"
 
 rescue ArgumentError => e
   puts e.message

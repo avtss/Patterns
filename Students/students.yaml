@@ -1,0 +1,28 @@
+---
+- :id: 1
+  :lastname: Иванов
+  :firstname: Иван
+  :surname: Иванович
+  :phone: "+71234567890"
+  :telegram: "@ivadsadasn"
+  :email: ivan@example.com
+  :github: https://github.com/ivanov
+  :birth_date: 11.03.2004
+- :id: 2
+  :lastname: Петров
+  :firstname: Петр
+  :surname: Петрович
+  :phone: "+79876543210"
+  :telegram:
+  :email:
+  :github: https://github.com/petrov
+  :birth_date: 05.08.2003
+- :id: 3
+  :lastname: Сидоров
+  :firstname: Сидор
+  :surname: Сидорович
+  :phone: "+74951234567"
+  :telegram:
+  :email: sidor@example.com
+  :github: https://github.com/sidorov
+  :birth_date: 12.11.2001
