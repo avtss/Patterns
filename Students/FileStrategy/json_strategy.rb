@@ -2,6 +2,7 @@ require 'json'
 require_relative 'file_strategy'
 
 class JSON_Strategy < File_strategy
+  def load(file_path)
     return [] unless File.exist?(file_path)
 
     file_content = File.read(file_path)
