@@ -65,7 +65,7 @@ class Students_list
         save_to_file
     end
 
-    def count
+    def get_student_short_count
         @students.size
-      end
+    end
 end
