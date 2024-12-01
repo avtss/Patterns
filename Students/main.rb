@@ -6,7 +6,11 @@ require_relative 'students_list_json'
 require_relative 'students_list_yaml'
 require_relative './DataList/data_list'
 require_relative './DataList/data_table'
-require_relative './DataList/data_list_student_short.rb'
+require_relative './DataList/data_list_student_short'
+require_relative './FileStrategy/json_strategy'
+require_relative './FileStrategy/yaml_strategy'
+require_relative 'students_list'
+
 
 begin
   student1 = Student.new(id: 1, lastname: 'Иванов', firstname: 'Иван', surname: 'Иванович', phone: '+71234567890', email: 'ivan@example.com', telegram: '@ivadsadasn', github: 'https://github.com/ivanov', birth_date: '11.03.2004')
@@ -82,12 +86,20 @@ begin
 #puts student
 
 
-students_list = Students_list_YAML.new('students.yaml')
+#students_list = Students_list_YAML.new('students.yaml')
 #students_list.add_student(student3)
 
-puts "Количество студентов: #{students_list.count}"
+#puts "Количество студентов: #{students_list.count}"
 
-puts "Отсортированные по имени: #{students_list.sort_by_fullname}"
+#puts "Отсортированные по имени: #{students_list.sort_by_fullname}"
+
+students_list_json = Students_list.new('students.json', JSONFileStrategy.new)
+
+puts "Количество студентов в JSON: #{students_list_json.count}"
+
+students_list_yaml = Students_list.new('students.yaml', YAMLFileStrategy.new)
+
+puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
 
 rescue ArgumentError => e
   puts e.message

@@ -3,18 +3,18 @@ require_relative 'student_short'
 require_relative 'DataList/data_list_student_short'
 
 class Students_list
-    def initialize(file_path)
-        @file_path = file_path
-        @students = []
-        load_from_file
-    end
+  def initialize(file_path, strategy)
+    @file_path = file_path
+    @strategy = strategy
+    @students = load_from_file
+  end
 
     def load_from_file
-        raise NotImplementedError, "Метод не реализован в классе Students_list"
+      @strategy.load(@file_path).map { |data| Student.new(**data) }
     end
-
+  
     def save_to_file
-        raise NotImplementedError, "Метод не реализован в классе Students_list"
+      @strategy.save(@file_path, @students)
     end
 
     def find_student_by_id(id)
