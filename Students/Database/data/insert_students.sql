@@ -1,0 +1,22 @@
+INSERT INTO student (last_name, first_name, surname, phone, email, telegram, github, birth_date)
+VALUES
+    ('Иванов', 'Иван', 'Иванович', '+71234567890', 'ivan@example.com', '@ivadsadasn', 'https://github.com/ivanov', '2004-03-11'),
+    ('Петров', 'Петр', 'Петрович', '+79876543210', 'petr@example.com', '@petr_petro', 'https://github.com/petrov', '1994-02-20'),
+    ('Сидоров', 'Сидор', 'Сидорович', '+74951234567', 'sidor@example.com', '@sidorov', 'https://github.com/sidorov', '1998-03-25'),
+    ('Александров', 'Александр', 'Александрович', '+79651234567', 'alexander@example.com', '@alex', 'https://github.com/alexander', '1995-05-15'),
+    ('Максимов', 'Максим', 'Максимович', '+79161234567', 'maxim@example.com', '@maxim', 'https://github.com/maximov', '1993-04-10'),
+    ('Егоров', 'Егор', 'Егорович', '+79811234567', 'egor@example.com', '@egorrr', 'https://github.com/egor', '1992-07-15'),
+    ('Кириллов', 'Кирилл', 'Кириллович', '+79991234567', 'kirill@example.com', '@kirill', 'https://github.com/kirillov', '1990-10-25'),
+    ('Дмитриев', 'Дмитрий', 'Дмитриевич', '+79011234567', 'dmitriy@example.com', '@dmitriy', 'https://github.com/dmitriev', '1991-06-30'),
+    ('Юрьев', 'Юрий', 'Юрьевич', '+79211234567', 'yuriy@example.com', '@yuriy', 'https://github.com/yuryev', '1993-08-05'),
+    ('Васильев', 'Василий', 'Васильевич', '+79331234567', 'vasiliy@example.com', '@vasiliy', 'https://github.com/vasiliev', '1997-12-25'),
+    ('Романов', 'Роман', 'Романович', '+79876543123', 'roman@example.com', '@romanov', 'https://github.com/romanov', '1990-09-15'),
+    ('Тарасов', 'Тарас', 'Тарасович', '+79987654321', 'taras@example.com', '@taras', 'https://github.com/tarasov', '1992-04-01'),
+    ('Фёдоров', 'Фёдор', 'Фёдорович', '+79765432109', 'fedor@example.com', '@fedor', 'https://github.com/fedorov', '1995-06-11'),
+    ('Григорьев', 'Григорий', 'Григорьевич', '+79543210987', 'grigoriy@example.com', '@grigoriy', 'https://github.com/grigoriev', '1988-03-14'),
+    ('Смирнов', 'Сергей', 'Сергеевич', '+79321098765', 'sergey@example.com', '@smirnov', 'https://github.com/smirnov', '1987-12-25'),
+    ('Михайлов', 'Михаил', 'Михайлович', '+79109876543', 'mikhail@example.com', '@mikhail', 'https://github.com/mikhailov', '1996-01-15'),
+    ('Андреев', 'Андрей', 'Андреевич', '+79901234567', 'andrey@example.com', '@andrey', 'https://github.com/andreev', '1994-07-22'),
+    ('Павлов', 'Павел', 'Павлович', '+79865432123', 'pavel@example.com', '@pavel', 'https://github.com/pavlov', '1991-11-30'),
+    ('Галкин', 'Глеб', 'Глебович', '+79754321987', 'gleb@example.com', '@glebbbb', 'https://github.com/galkin', '1993-05-09'),
+    ('Захаров', 'Захар', 'Захарович', '+79643219876', 'zahar@example.com', '@zahar', 'https://github.com/zaharov', '1992-10-12');
