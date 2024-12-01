@@ -1,4 +1,4 @@
-require './student.rb'
+require_relative '..Entities/student.rb'
 
 class Student_tree
     include Enumerable

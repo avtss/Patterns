@@ -1,6 +1,6 @@
-require_relative 'student'
-require_relative 'student_short'
-require_relative 'DataList/data_list_student_short'
+require_relative '..Entities/student'
+require_relative '..Entities/student_short'
+require_relative '..DataList/data_list_student_short'
 
 class Students_list
   def initialize(file_path, strategy)
