@@ -1,4 +1,4 @@
-require_relative 'human'
+require_relative './human'
 require 'date'
 
 class Student < Human

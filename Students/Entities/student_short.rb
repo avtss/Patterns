@@ -1,5 +1,5 @@
-require_relative 'human'
-require_relative 'student'
+require_relative './human'
+require_relative './student'
 
 class Student_short < Human
   attr_reader :lastname_initials, :contact
