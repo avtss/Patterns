@@ -91,11 +91,11 @@ begin
 
 #puts "Отсортированные по имени: #{students_list.sort_by_fullname}"
 
-students_list_json = Students_list.new('students.json', JSONFileStrategy.new)
+students_list_json = Students_list.new('students.json', JSON_Strategy.new)
 
 puts "Количество студентов в JSON: #{students_list_json.count}"
 
-students_list_yaml = Students_list.new('students.yaml', YAMLFileStrategy.new)
+students_list_yaml = Students_list.new('students.yaml', YAML_Strategy.new)
 
 puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
 

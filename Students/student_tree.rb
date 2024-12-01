@@ -1,6 +1,6 @@
 require './student.rb'
 
-class StudentTree
+class Student_tree
     include Enumerable
 
     def initialize

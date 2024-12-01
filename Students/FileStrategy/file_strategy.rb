@@ -1,4 +1,4 @@
-class FileStrategy
+class File_strategy
     def load(file_path)
       raise NotImplementedError, 'Метод load не реализован в классе FileStrategy'
     end
