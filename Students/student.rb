@@ -1,4 +1,5 @@
 require_relative 'human'
+require 'date'
 
 class Student < Human
   include Comparable
@@ -9,7 +10,6 @@ class Student < Human
   NAME_REGEX = /^[А-ЯЁ][а-яё]+\s*$/
   EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   TELEGRAM_REGEX = /^@\w{5,}$/
-  BIRTHDATE_REGEX = /\A(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})\z/
 
   def initialize(lastname:, firstname:, surname:, id: nil, phone: nil, telegram: nil, email: nil, github: nil, birth_date: nil)
     self.lastname = lastname
@@ -31,7 +31,7 @@ class Student < Human
     telegram = info[5].strip.empty? ? nil : info[5].strip
     email = info[6].strip.empty? ? nil : info[6].strip
     github = info[7].strip.empty? ? nil : info[7].strip
-    birth_date = info[8].strip.empty? ? nil : info[8]
+    birth_date = info[8].strip.empty? ? nil : Date.parse(info[8].strip)
     new(id: id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github, birth_date: birth_date)
   rescue ArgumentError => e
     raise "Ошибка: #{e.message}"
@@ -92,11 +92,9 @@ class Student < Human
 	end
 
   def birth_date=(val)
-    if self.class.valid_birthdate?(val)
-      @birth_date = val
-    else
-      raise ArgumentError, "Некорректная дата рождения. Ожидаемый формат: ДД.ММ.ГГГГ"
-    end
+    @birth_date = Date.parse(val.to_s)
+  rescue ArgumentError
+    raise ArgumentError, "Некорректная дата рождения. Ожидаемый формат: ГГГГ-ММ-ДД или объект Date"
   end
 
   def set_contacts(phone: nil, telegram: nil, email: nil)
@@ -138,10 +136,7 @@ class Student < Human
   end
 
   def <=>(other)
-    day1, month1, year1 = @birth_date.split('.').map(&:to_i)
-    day2, month2, year2 = other.birth_date.split('.').map(&:to_i)
-
-    [year1, month1, day1] <=> [year2, month2, day2]
+    other.birth_date <=> @birth_date
   end
 end
 

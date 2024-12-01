@@ -7,7 +7,7 @@
   :telegram: "@ivadsadasn"
   :email: ivan@example.com
   :github: https://github.com/ivanov
-  :birth_date: 11.03.2004
+  :birth_date: 2004-03-11
 - :id: 2
   :lastname: Петров
   :firstname: Петр
@@ -16,7 +16,7 @@
   :telegram:
   :email:
   :github: https://github.com/petrov
-  :birth_date: 05.08.2003
+  :birth_date: 2003-08-05
 - :id: 3
   :lastname: Сидоров
   :firstname: Сидор
@@ -25,4 +25,4 @@
   :telegram:
   :email: sidor@example.com
   :github: https://github.com/sidorov
-  :birth_date: 12.11.2001
+  :birth_date: 2001-11-12

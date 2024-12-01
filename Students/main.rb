@@ -2,8 +2,6 @@ require_relative 'student'
 require_relative 'student_short'
 require_relative 'human'
 require_relative 'student_tree'
-require_relative 'students_list_json'
-require_relative 'students_list_yaml'
 require_relative './DataList/data_list'
 require_relative './DataList/data_table'
 require_relative './DataList/data_list_student_short'
@@ -13,13 +11,13 @@ require_relative 'students_list'
 
 
 begin
-  student1 = Student.new(id: 1, lastname: 'Иванов', firstname: 'Иван', surname: 'Иванович', phone: '+71234567890', email: 'ivan@example.com', telegram: '@ivadsadasn', github: 'https://github.com/ivanov', birth_date: '11.03.2004')
+  student1 = Student.new(id: 1, lastname: 'Иванов', firstname: 'Иван', surname: 'Иванович', phone: '+71234567890', email: 'ivan@example.com', telegram: '@ivadsadasn', github: 'https://github.com/ivanov', birth_date: '11-03-2004')
   #puts student1
-  student2 = Student.new(id: 2, lastname: 'Петров', firstname: 'Петр', surname: 'Петрович', phone: '+79876543210', github: 'https://github.com/petrov', birth_date: '05.08.2003') 
+  student2 = Student.new(id: 2, lastname: 'Петров', firstname: 'Петр', surname: 'Петрович', phone: '+79876543210', github: 'https://github.com/petrov', birth_date: '05-08-2003') 
   #puts student2
-  student3 = Student.new(id: 3, lastname: 'Сидоров', firstname: 'Сидор', surname: 'Сидорович', phone: '+74951234567', email: 'sidor@example.com', github: 'https://github.com/sidorov', birth_date: '12.11.2001')
+  student3 = Student.new(id: 3, lastname: 'Сидоров', firstname: 'Сидор', surname: 'Сидорович', phone: '+74951234567', email: 'sidor@example.com', github: 'https://github.com/sidorov', birth_date: '12-11-2001')
   #puts student3
-  student4 = Student.from_string("4;Иванов;Иван;Иванович;+79998887700;@ivanov;ivanov@example.com;https://github.com/ivanov;05.08.2003")
+  student4 = Student.from_string("4;Иванов;Иван;Иванович;+79998887700;@ivanov;ivanov@example.com;https://github.com/ivanov;05-08-2003")
   #puts student4
 
   #Фамилия И.О., https://github.com/example, contact   
