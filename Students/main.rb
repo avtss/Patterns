@@ -8,6 +8,8 @@ require_relative './DataList/data_list_student_short'
 require_relative './FileStrategy/json_strategy'
 require_relative './FileStrategy/yaml_strategy'
 require_relative 'students_list'
+require_relative './Database/DB_connection'
+require 'pg'
 
 
 begin
@@ -91,14 +93,19 @@ begin
 
 #puts "Отсортированные по имени: #{students_list.sort_by_fullname}"
 
-students_list_json = Students_list.new('students.json', JSON_Strategy.new)
+#students_list_json = Students_list.new('students.json', JSON_Strategy.new)
 
-puts "Количество студентов в JSON: #{students_list_json.count}"
+#puts "Количество студентов в JSON: #{students_list_json.count}"
 
-students_list_yaml = Students_list.new('students.yaml', YAML_Strategy.new)
+#students_list_yaml = Students_list.new('students.yaml', YAML_Strategy.new)
 
-puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
-
+#puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
+con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
+result = con.execute_query('SELECT * FROM student')
+  result.each do |row|
+    puts row
+  end
+con.close
 rescue ArgumentError => e
   puts e.message
 end
