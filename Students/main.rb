@@ -9,7 +9,7 @@ require_relative './FileStrategy/yaml_strategy'
 require_relative './DataStructures/student_tree'
 require_relative './DataStructures/students_list'
 require_relative './Database/DB_connection'
-require_relative './Database/students_list_DB'
+require_relative './DataStructures/students_list_DB'
 require 'pg'
 
 
