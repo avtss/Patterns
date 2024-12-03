@@ -21,18 +21,13 @@ class Students_list
         @students.find { |student| student.id == id }
     end
 
-    def get_k_n_student_short_list(k, n, existing_data_list = nil)
+    def get_k_n_student_short_list(k, n)
         start_index = (k - 1) * n
         end_index = start_index + n - 1
         short_students = @students[start_index..end_index] || []
         return existing_data_list || Data_list_student_short.new([]) if short_students.empty?
     
         short_students = short_students.map { |student| Student_short.from_student(student) }
-        if existing_data_list
-          existing_data_list.data = short_students
-          short_students.each_with_index { |_, ind| existing_data_list.select(ind) }
-          return existing_data_list
-        end
     
         selected_list = Data_list_student_short.new(short_students)
         short_students.each_with_index { |_, ind| selected_list.select(ind) }
