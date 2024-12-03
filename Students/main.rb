@@ -9,6 +9,7 @@ require_relative './FileStrategy/yaml_strategy'
 require_relative './DataStructures/student_tree'
 require_relative './DataStructures/students_list'
 require_relative './Database/DB_connection'
+require_relative './Database/students_list_DB'
 require 'pg'
 
 
@@ -101,26 +102,62 @@ begin
 
 #puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
 
-#con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
+con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
 #result = con.execute_query('SELECT * FROM student')
 #  result.each do |row|
 #    puts row
 #  end
 #con.close
-full_data = {
-  id: '1',
-  lastname: 'Иванов',
-  firstname: 'Иван',
-  surname: 'Иванович',
-  phone: '+71234567890',
-  email: 'ivan@example.com',
-  telegram: '@ivanov',
-  github: 'https://github.com/ivanov',
-  birth_date: '2004-03-11'
-}
+#full_data = {
+#  id: '1',
+#  lastname: 'Иванов',
+#  firstname: 'Иван',
+#  surname: 'Иванович',
+#  phone: '+71234567890',
+#  email: 'ivan@example.com',
+#  telegram: '@ivanov',
+#  github: 'https://github.com/ivanov',
+#  birth_date: '2004-03-11'
+#}
+#student1 = Student.from_hash(full_data)
 
-student1 = Student.from_hash(full_data)
-puts student1.to_s
+
+students_list = Students_list_DB.new(con)
+
+student = Student.new(
+  lastname: 'Задикян',
+  firstname: 'Аветис',
+  surname: 'Арутюнович',
+  phone: '+79881834551',
+  email: 'avetis@example.com',
+  telegram: '@avetissss',
+  github: 'https://github.com/avtss',
+  birth_date: '2004-08-05'
+)
+
+#students_list.add_student(student)
+#puts "Количество студентов: #{students_list.get_student_count}"
+
+#found_student = students_list.find_student_by_id(11)
+#puts "Нашли студента с id 11: #{found_student.to_s}"
+
+updated_student = Student.new(
+  lastname: 'Эксузян',
+  firstname: 'Аветис',
+  surname: 'Арутюнович',
+  phone: '+79881834551',
+  email: 'avetis@example.com',
+  telegram: '@avetissss',
+  github: 'https://github.com/avtss',
+  birth_date: '2004-08-05'
+)
+#students_list.update_student_by_id(29, updated_student)
+
+puts students_list.get_k_n_student_short_list(2, 5).get_data
+
+#students_list.delete_student_by_id(20)
+
+#puts "Количество студентов: #{students_list.get_student_count}"
 rescue ArgumentError => e
   puts e.message
 end
