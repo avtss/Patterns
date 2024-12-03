@@ -26,12 +26,16 @@ class ArrayProcessor
 		result
 	end
 
-	def sort
-		sorted_array = arr.dup
-		if block_given?
-		  sorted_array.sort! { |a, b| yield(a, b) }
-		else
-		  sorted_array.sort!
+	def sort()
+		sorted_array = arr.dup	  
+		for i in 0...sorted_array.length do
+		  for j in 0...(sorted_array.length - i - 1) do
+			if yield(sorted_array[j], sorted_array[j + 1]) > 0
+			  temp = sorted_array[j]
+			  sorted_array[j] = sorted_array[j + 1]
+			  sorted_array[j + 1] = temp
+			end
+		  end
 		end
 		sorted_array
 	end
