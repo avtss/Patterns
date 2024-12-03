@@ -100,12 +100,27 @@ begin
 #students_list_yaml = Students_list.new('students.yaml', YAML_Strategy.new)
 
 #puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
-con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
-result = con.execute_query('SELECT * FROM student')
-  result.each do |row|
-    puts row
-  end
-con.close
+
+#con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
+#result = con.execute_query('SELECT * FROM student')
+#  result.each do |row|
+#    puts row
+#  end
+#con.close
+full_data = {
+  id: '1',
+  lastname: 'Иванов',
+  firstname: 'Иван',
+  surname: 'Иванович',
+  phone: '+71234567890',
+  email: 'ivan@example.com',
+  telegram: '@ivanov',
+  github: 'https://github.com/ivanov',
+  birth_date: '2004-03-11'
+}
+
+student1 = Student.from_hash(full_data)
+puts student1.to_s
 rescue ArgumentError => e
   puts e.message
 end

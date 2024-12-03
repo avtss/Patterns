@@ -37,6 +37,21 @@ class Student < Human
     raise "Ошибка: #{e.message}"
   end
 
+  def self.from_hash(hash)
+    id = hash[:id]&.to_i
+    lastname = hash[:lastname]&.strip
+    firstname = hash[:firstname]&.strip
+    surname = hash[:surname]&.strip
+    phone = hash[:phone]&.strip&.empty? ? nil : hash[:phone]&.strip
+    telegram = hash[:telegram]&.strip&.empty? ? nil : hash[:telegram]&.strip
+    email = hash[:email]&.strip&.empty? ? nil : hash[:email]&.strip
+    github = hash[:github]&.strip&.empty? ? nil : hash[:github]&.strip
+    birth_date = hash[:birth_date]&.strip&.empty? ? nil : Date.parse(hash[:birth_date].strip)
+    new(id: id, lastname: lastname, firstname: firstname, surname: surname, phone: phone, telegram: telegram, email: email, github: github, birth_date: birth_date)
+  rescue ArgumentError => e
+    raise "Ошибка: #{e.message}"
+  end
+
   def to_s
     contact_info = []
     contact_info << "телефон: #{@phone}" if @phone
