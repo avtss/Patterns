@@ -9,7 +9,7 @@ class Student < Human
   PHONE_REGEX = /^\+7\d{10}$/
   NAME_REGEX = /^[А-ЯЁ][а-яё]+\s*$/
   EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  TELEGRAM_REGEX = /^@\w{5,}$/
+  TELEGRAM_REGEX = /^@\w{3,}$/
 
   def initialize(lastname:, firstname:, surname:, id: nil, phone: nil, telegram: nil, email: nil, github: nil, birth_date: nil)
     self.lastname = lastname
