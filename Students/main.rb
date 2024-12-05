@@ -10,7 +10,9 @@ require_relative './DataStructures/student_tree'
 require_relative './DataStructures/students_list'
 require_relative './Database/DB_connection'
 require_relative './DataStructures/students_list_DB'
-require 'pg'
+require_relative './DataStructures/ListAdapter/students_list_adapter'
+require_relative './DataStructures/ListAdapter/students_list_db_adapter'
+
 
 
 begin
@@ -102,7 +104,7 @@ begin
 
 #puts "Отсортированные по фио студенты в YAML: #{students_list_yaml.sort_by_fullname}"
 
-con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
+
 #result = con.execute_query('SELECT * FROM student')
 #  result.each do |row|
 #    puts row
@@ -122,7 +124,7 @@ con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34
 #student1 = Student.from_hash(full_data)
 
 
-students_list = Students_list_DB.instance(con)
+#students_list = Students_list_DB.instance(con)
 
 
 student = Student.new(
@@ -154,11 +156,25 @@ updated_student = Student.new(
 )
 #students_list.update_student_by_id(29, updated_student)
 
-puts students_list.get_k_n_student_short_list(2, 5).get_data
+#puts students_list.get_k_n_student_short_list(2, 5).get_data
 
 #students_list.delete_student_by_id(20)
 
 #puts "Количество студентов: #{students_list.get_student_count}"
+
+file_adapter = Students_list_adapter.new('students.yaml', YAML_Strategy.new)
+
+puts "Всего студентов в файле: #{file_adapter.get_student_count}"
+student = file_adapter.find_student_by_id(1)
+puts "Найден студент: #{student}"
+
+con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34567', database: 'student')
+
+db_adapter = Students_list_db_adapter.new(con)
+
+puts "Всего студентов в БД: #{db_adapter.get_student_count}"
+student = db_adapter.find_student_by_id(1)
+puts "Найден студент: #{student}"
 rescue ArgumentError => e
   puts e.message
 end
