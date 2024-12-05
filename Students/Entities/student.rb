@@ -151,7 +151,7 @@ class Student < Human
   end
 
   def <=>(other)
-    other.birth_date <=> @birth_date
+    other.birth_date <=> self.birth_date
   end
 end
 
