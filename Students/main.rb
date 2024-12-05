@@ -122,7 +122,8 @@ con= DBConnection.new(host: 'localhost', username: 'postgres', password: '1q2w34
 #student1 = Student.from_hash(full_data)
 
 
-students_list = Students_list_DB.new(con)
+students_list = Students_list_DB.instance(con)
+
 
 student = Student.new(
   lastname: 'Задикян',

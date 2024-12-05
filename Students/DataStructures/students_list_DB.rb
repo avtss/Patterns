@@ -4,8 +4,15 @@ require_relative '../DataList/data_list_student_short.rb'
 require_relative '../Database/DB_connection.rb'
 
 class Students_list_DB
-  def initialize(db_connection)
-    @db = db_connection
+  @instance = nil
+
+  def self.instance(db_connection)
+    @instance ||= new(db_connection)
+    @instance
+  end
+
+  def self.reset_instance
+    @instance = nil
   end
 
   def find_student_by_id(id)
@@ -89,4 +96,12 @@ class Students_list_DB
     result = @db.execute_query('SELECT COUNT(*) FROM student')
     result[0]['count'].to_i
   end
+
+  private
+  
+  def initialize(db_connection)
+    @db = db_connection
+  end
+
+  private_class_method :new
 end
