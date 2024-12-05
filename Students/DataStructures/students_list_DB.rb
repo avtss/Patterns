@@ -36,27 +36,28 @@ class Students_list_DB
     start_index = (k - 1) * n + 1
     end_index = start_index + n - 1
     query = "
-    SELECT * FROM student
-    WHERE id BETWEEN #{start_index} AND #{end_index}
+      SELECT * FROM student
+      WHERE id BETWEEN #{start_index} AND #{end_index}
     "
-  result = @db.execute_query(query)
-  students = result.map do |row|
-    Student.new(
-      id: row['id'].to_i,
-      lastname: row['last_name'],
-      firstname: row['first_name'],
-      surname: row['surname'],
-      phone: row['phone'],
-      email: row['email'],
-      telegram: row['telegram'],
-      github: row['github'],
-      birth_date: row['birth_date']
-    )
-  end
-  short_students = students.map { |student| Student_short.from_student(student) }
-  selected_list = Data_list_student_short.new(short_students)
-  short_students.each_with_index { |_, index| selected_list.select(index) }
-  selected_list
+    result = @db.execute_query(query)
+    students = result.map do |row|
+      Student.from_hash(
+        id: row['id'],
+        lastname: row['last_name'],
+        firstname: row['first_name'],
+        surname: row['surname'],
+        phone: row['phone'],
+        email: row['email'],
+        telegram: row['telegram'],
+        github: row['github'],
+        birth_date: row['birth_date']
+      )
+    end
+    short_students = students.map { |student| Student_short.from_student(student) }
+
+    selected_list = Data_list_student_short.new(short_students)
+    short_students.each_with_index { |_, index| selected_list.select(index) }
+    selected_list
   end
   
   def add_student(student)
