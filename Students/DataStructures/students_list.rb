@@ -24,9 +24,8 @@ class Students_list
     def get_k_n_student_short_list(k, n)
         start_index = (k - 1) * n
         end_index = start_index + n - 1
+        
         short_students = @students[start_index..end_index] || []
-        return existing_data_list || Data_list_student_short.new([]) if short_students.empty?
-    
         short_students = short_students.map { |student| Student_short.from_student(student) }
     
         selected_list = Data_list_student_short.new(short_students)
