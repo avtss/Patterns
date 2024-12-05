@@ -19,8 +19,9 @@ class Students_list_DB
     result = @db.execute_query("SELECT * FROM student WHERE id = #{id}")
     return nil if result.ntuples == 0
     row = result[0]
-    Student.new(
-      id: row['id'].to_i,
+  
+    Student.from_hash(
+      id: row['id'],
       lastname: row['last_name'],
       firstname: row['first_name'],
       surname: row['surname'],
@@ -31,6 +32,7 @@ class Students_list_DB
       birth_date: row['birth_date']
     )
   end
+  
 
   def get_k_n_student_short_list(k, n)
     start_index = (k - 1) * n + 1
