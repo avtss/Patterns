@@ -8,6 +8,7 @@ class ArrayProcessor
 		arr.each do |element|
 		  return element if yield(element)
 		end
+		nil
 	end
 
 	def map
