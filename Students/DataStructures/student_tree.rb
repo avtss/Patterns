@@ -7,15 +7,11 @@ class Student_tree
 		@root = nil
 	end
 
-    def insert(student)
-		unless student.is_a?(Student)
-			raise ArgumentError, "Аргумент должен быть экземпляром класса Student"
-		end
-
+    def insert(element)
 		if @root.nil?
-			@root = Node.new(student)
+			@root = Node.new(element)
 		else
-			insert_node(@root, student)
+			insert_node(@root, element)
 		end
 	end
 
@@ -25,18 +21,18 @@ class Student_tree
 
     private 
 
-	def insert_node(node, student)
-    	if student < node.student
+	def insert_node(node, element)
+    	if element < node.element
       		if node.left.nil?
-        		node.left = Node.new(student)
+        		node.left = Node.new(element)
       		else
-        		insert_node(node.left, student)
+        		insert_node(node.left, element)
       		end
     	else
       		if node.right.nil?
-        		node.right = Node.new(student)
+        		node.right = Node.new(element)
       		else
-        		insert_node(node.right, student)
+        		insert_node(node.right, element)
       		end
     	end
 	end
@@ -46,16 +42,16 @@ class Student_tree
     	return if node.nil?
 
     	traversal(node.left, &block)
-    	yield(node.student)
+    	yield(node.element)
     	traversal(node.right, &block)
     end
 end
 
 class Node
-    attr_accessor :student, :left, :right
+    attr_accessor :element, :left, :right
 
-    def initialize(student)
-        @student = student
+    def initialize(element)
+        @element=element
         @left = nil
         @right = nil
     end
