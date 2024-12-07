@@ -26,8 +26,8 @@ class Students_list_db_adapter < Adapter
       @students_list_db.delete_student_by_id(id)
     end
   
-    def get_student_count
-      @students_list_db.get_student_count
+    def get_student_short_count
+      @students_list_db.get_student_short_count
     end
   end
   
