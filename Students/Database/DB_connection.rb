@@ -1,14 +1,15 @@
 require 'pg'
 
-class DBConnection
-  def initialize(host:, username:, password:, database:, port: 5432)
-    @connection = PG.connect(
-      host: host,
-      user: username,
-      password: password,
-      dbname: database,
-      port: port
-    )
+class DB_Connection
+  @instance = nil
+
+  def self.instance(db_config)
+    @instance ||= new(db_config)
+    @instance
+  end
+
+  def self.reset_instance
+    @instance = nil
   end
 
   def execute_query(query)
@@ -17,5 +18,13 @@ class DBConnection
 
   def close
     @connection.close if @connection
+  end
+
+  private_class_method :new
+
+  private
+
+  def initialize(db_config)
+    @connection = PG.connect(db_config)
   end
 end
