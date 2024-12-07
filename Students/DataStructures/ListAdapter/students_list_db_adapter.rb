@@ -1,20 +1,14 @@
-require_relative '../Entities/student.rb'
-require_relative '../Entities/student_short.rb'
-require_relative '../DataList/data_list_student_short.rb'
-require_relative '../Database/DB_connection.rb'
+require_relative '.../Entities/student.rb'
+require_relative '.../Entities/student_short.rb'
+require_relative '.../DataList/data_list_student_short.rb'
+require_relative '.../Database/DB_connection.rb'
+require_relative './adapter.rb'
 
-class Students_list_DB
-  @instance = nil
-
-  def self.instance(db_connection)
-    @instance ||= new(db_connection)
-    @instance
+class Students_list_DB < Adapter
+  def initialize(db_config)
+    @db = DB_Connection.instance(db_config)
   end
-
-  def self.reset_instance
-    @instance = nil
-  end
-
+  
   def find_student_by_id(id)
     result = @db.execute_query("SELECT * FROM student WHERE id = #{id}")
     return nil if result.ntuples == 0
@@ -33,7 +27,6 @@ class Students_list_DB
     )
   end
   
-
   def get_k_n_student_short_list(k, n)
     start_index = (k - 1) * n + 1
     end_index = start_index + n - 1
@@ -100,11 +93,4 @@ class Students_list_DB
     result[0]['count'].to_i
   end
 
-  private
-  
-  def initialize(db_connection)
-    @db = db_connection
-  end
-
-  private_class_method :new
 end
