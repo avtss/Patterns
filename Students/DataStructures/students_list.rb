@@ -40,6 +40,7 @@ class Students_list
       def add_student(student)
         new_id = (@students.map(&:id).max || 0) + 1
         student.id = new_id
+        @students.any? {|st| st.same_contacts?(student)}
         @students << student
         save_to_file
       end
