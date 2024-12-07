@@ -1,10 +1,6 @@
-require_relative '.../Entities/student.rb'
-require_relative '.../Entities/student_short.rb'
-require_relative '.../DataList/data_list_student_short.rb'
-require_relative '.../Database/DB_connection.rb'
 require_relative './adapter.rb'
 
-class Students_list_DB < Adapter
+class Students_list_db_adapter < Adapter
   def initialize(db_config)
     @db = DB_Connection.instance(db_config)
   end
@@ -92,5 +88,4 @@ class Students_list_DB < Adapter
     result = @db.execute_query('SELECT COUNT(*) FROM student')
     result[0]['count'].to_i
   end
-
 end
