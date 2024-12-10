@@ -3,23 +3,22 @@ class Data_table
     self.data = data
   end
 
-  def get_element(num_of_row,num_of_column)
-    self.data[num_of_row][num_of_column]
+  def get_element(num_of_row, num_of_column)
+    deep_dup(data)[num_of_row][num_of_column]
   end
   
   def row_count
-    self.data.size
+    data.size
   end
 
   def col_count
-    if self.data.empty?
-        return 0
-    end
-    self.data[0].size
+    return 0 if data.empty?
+
+    data[0].size
   end
 
   def to_s 
-    self.data.inspect
+    data.inspect
   end
 
   private
@@ -27,22 +26,21 @@ class Data_table
   attr_reader :data
 
   def data=(data)
-    unless data.is_a?(Array) && data.all? {|row| row.is_a?(Array)}
-        raise ArgumentError, "Данные должны быть в виде двумерного массива"
+    unless data.is_a?(Array) && data.all? { |row| row.is_a?(Array) }
+      raise ArgumentError, "Данные должны быть в виде двумерного массива"
     end
+    @data = deep_dup(data)
+  end
 
-    def deep_dup(element)
-      if element.is_a?(Array)
-          element.map { |sub_element| deep_dup(sub_element) }
-      else
-          begin
-              element.dup
-          rescue
-              element
-        end
+  def deep_dup(element)
+    if element.is_a?(Array)
+      element.map { |sub_element| deep_dup(sub_element) }
+    else
+      begin
+        element.dup
+      rescue
+        element
       end
     end
-
-    @data = data.map{ |row| row.map { |element| deep_dup(element) }}
   end
 end
