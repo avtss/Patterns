@@ -2,8 +2,9 @@ require_relative './adapter.rb'
 require_relative '../students_list.rb'
 
 class Students_list_adapter < Adapter
-    def initialize(file_path, strategy)
-      @students_list = Students_list.new(file_path, strategy)
+    def initialize(strategy, file_path)
+      @students_list = Students_list.new(strategy)
+      @students_list.load(file_path)
     end
   
     def find_student_by_id(id)
