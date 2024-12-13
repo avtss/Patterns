@@ -1,30 +1,25 @@
 require 'pg'
 
 class DB_Connection
-  @instance = nil
+  private_class_method :new
+  @@instance = nil
 
-  def self.instance(db_config)
-    @instance ||= new(db_config)
-    @instance
+  private 
+
+  def initialize(db_config)
+    @connection = PG.connect(db_config)
   end
 
-  def self.reset_instance
-    @instance = nil
-  end
+  public 
 
   def execute_query(query)
     @connection.exec(query)
   end
 
-  def close
-    @connection.close if @connection
-  end
-
-  private_class_method :new
-
-  private
-
-  def initialize(db_config)
-    @connection = PG.connect(db_config)
+  def self.instance(db_config)
+    unless @@instance
+      @@instance = new(db_config)
+    end
+    @@instance  
   end
 end
