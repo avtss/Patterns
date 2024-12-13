@@ -58,11 +58,11 @@ student4 = Student.from_hash(
   sttree.insert(student2)
   sttree.insert(student3)
   sttree.insert(student4)
-  puts sttree.select{|s| s.lastname=="Кузнецов"}
+  #puts sttree.select{|s| s.lastname=="Кузнецов"}
 
 
-  
-list_adapter1 = List_adapter.new(Students_list_adapter.new('students.yaml', YAML_Strategy.new))
+yamlstrat=YAML_Strategy.new()
+list_adapter1 = List_adapter.new(Students_list_adapter.new(yamlstrat, "students.yaml"))
 
 puts "Всего студентов в файле: #{list_adapter1.get_student_short_count}"
 student = list_adapter1.find_student_by_id(1)
@@ -73,10 +73,16 @@ db_config = {
 }
 con = DB_Connection.instance(db_config)
 
+#db_config2 = {
+#  host: 'localhost', user: 'postgres', password: '1q2w34567', dbname: 'postgres'
+#}
+
+#con2 = DB_Connection.instance(db_config2)
+
 list_adapter2 = List_adapter.new(Students_list_db_adapter.new(con))
 
 puts "Всего студентов в БД: #{list_adapter2.get_student_short_count}"
-student = list_adapter2.find_student_by_id(1)
+student = list_adapter2.find_student_by_id(15)
 puts "Найден студент: #{student}"
 
 short_list=list_adapter2.get_k_n_student_short_list(2, 10)
