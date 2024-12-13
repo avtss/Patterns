@@ -10,7 +10,7 @@ class Data_list_student_short < Data_list
         ["№", "full_name", "git", "contact"]
     end
 
-    def build_row(index, obj)
-        [index, obj.lastname_initials, obj.github, obj.contact]
+    def build_row(obj)
+        [obj.id, obj.lastname_initials, obj.github, obj.contact]
     end
 end

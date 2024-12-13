@@ -23,12 +23,10 @@ class Data_list
 
     def get_data
         result = [self.get_names]
-        index = 1
-        selected.each do |selected_index|
-          obj = self.data[selected_index]
-          row = build_row(index, obj)
-          result << row
-          index += 1
+        self.selected.each do |selected_index|
+            obj = self.data[selected_index]
+            row = build_row(obj) 
+            result << row
         end
         Data_table.new(result)
     end
