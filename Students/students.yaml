@@ -26,3 +26,12 @@
   :email: sidor@example.com
   :github: https://github.com/sidorov
   :birth_date: 2001-11-12
+- :id: 4
+  :lastname: Кузнецов
+  :firstname: Николай
+  :surname: Николаевич
+  :phone: "+71234571238"
+  :telegram: "@kuznetsov_nikolay"
+  :email: kuznetsov.nikolay@example.com
+  :github: https://github.com/kuznetsov-nikolay
+  :birth_date: 2001-03-25

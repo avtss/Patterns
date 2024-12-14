@@ -154,13 +154,11 @@ class Student < Human
     other.birth_date <=> self.birth_date
   end
 
-  def same_contacts?(student)
-    unless student.is_a?(Student)
-      raise ArgumentError, "Передан не объект класса Student"
+  def ==(other)
+    if @phone == other.phone || @github == other.github || @email == other.email || @telegram == other.telegram
+      return true
     end
-    if @phone == student.phone || @github == student.github || @email == student.email || @telegram == student.telegram
-      raise "Ошибка: Студент с такими контактами уже существует"
-    end
+    return false
   end
 end
 

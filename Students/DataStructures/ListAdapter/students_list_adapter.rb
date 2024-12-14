@@ -3,8 +3,8 @@ require_relative '../students_list.rb'
 
 class Students_list_adapter < Adapter
     def initialize(strategy, file_path)
-      @students_list = Students_list.new(strategy)
-      @students_list.load(file_path)
+      @students_list = Students_list.new(strategy, file_path)
+      @students_list.load()
     end
   
     def find_student_by_id(id)
@@ -17,17 +17,17 @@ class Students_list_adapter < Adapter
   
     def add_student(student)
       @students_list.add_student(student)
-      @students_list.save_to_file
+      @students_list.save
     end
   
     def update_student_by_id(id, updated_student)
       @students_list.update_student_by_id(id, updated_student)
-      @students_list.save_to_file
+      @students_list.save
     end
   
     def delete_student_by_id(id)
       @students_list.delete_student_by_id(id)
-      @students_list.save_to_file
+      @students_list.save
     end
   
     def get_student_short_count

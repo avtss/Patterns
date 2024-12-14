@@ -3,18 +3,19 @@ require_relative '../Entities/student_short.rb'
 require_relative '../DataList/data_list_student_short.rb'
 
 class Students_list
-  def initialize(strategy)
+  def initialize(strategy, file_path)
     @strategy = strategy
     @students=[]
+    @file_path = file_path
   end
 
-  def load(file_path)
-    data = @strategy.load(file_path)
+  def load()
+    data = @strategy.load(@file_path)
     @students = data.map { |student_data| Student.new(**student_data) }
   end
   
-    def save(file_path)
-      @strategy.save(file_path, @students)
+    def save()
+      @strategy.save(@file_path, @students)
     end
 
     def find_student_by_id(id)
@@ -45,11 +46,16 @@ class Students_list
       def add_student(student)
         new_id = (@students.map(&:id).max || 0) + 1
         student.id = new_id
-        @students.any? {|st| st.same_contacts?(student)}
+        if @students.any? {|st| st==student}
+          raise ArgumentError, "Студент с такими контактами уже существует"
+        end
         @students << student
       end
     
       def update_student_by_id(id, updated_student)
+        if @students.any? {|st| st==updated_rstudent}
+          raise ArgumentError, "Студент с такими контактами уже существует"
+        end
         index = @students.find_index { |student| student.id == id }
         return false unless index
     

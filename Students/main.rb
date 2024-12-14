@@ -63,7 +63,18 @@ student4 = Student.from_hash(
 
 yamlstrat=YAML_Strategy.new()
 list_adapter1 = List_adapter.new(Students_list_adapter.new(yamlstrat, "students.yaml"))
-
+student5 = Student.from_hash(
+  id: 4,
+  lastname: "Кузнецов",
+  firstname: "Николай",
+  surname: "Николаевич",
+  phone: "+71234571238",
+  telegram: "@kuznetsov_nikolay",
+  email: "kuznetsov.nikolay@example.com",
+  github: "https://github.com/kuznetsov-nikolay",
+  birth_date: "2001-03-25"
+)
+list_adapter1.add_student(student5)
 puts "Всего студентов в файле: #{list_adapter1.get_student_short_count}"
 student = list_adapter1.find_student_by_id(1)
 puts "Найден студент: #{student}"
