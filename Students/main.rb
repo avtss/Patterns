@@ -64,14 +64,10 @@ student4 = Student.from_hash(
 yamlstrat=YAML_Strategy.new()
 list_adapter1 = List_adapter.new(Students_list_adapter.new(yamlstrat, "students.yaml"))
 student5 = Student.from_hash(
-  id: 4,
-  lastname: "Кузнецов",
-  firstname: "Николай",
-  surname: "Николаевич",
-  phone: "+71234571238",
-  telegram: "@kuznetsov_nikolay",
-  email: "kuznetsov.nikolay@example.com",
-  github: "https://github.com/kuznetsov-nikolay",
+  id: 5,
+  lastname: "Задикян",
+  firstname: "Аветис",
+  surname: "Арутюнович",
   birth_date: "2001-03-25"
 )
 list_adapter1.add_student(student5)

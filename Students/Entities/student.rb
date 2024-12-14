@@ -155,7 +155,7 @@ class Student < Human
   end
 
   def ==(other)
-    if @phone == other.phone || @github == other.github || @email == other.email || @telegram == other.telegram
+    if @phone && other.phone && @phone == other.phone || @github && other.github && @github == other.github || @email && other.email && @email == other.email || @telegram && other.telegram && @telegram == other.telegram
       return true
     end
     return false
