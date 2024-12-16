@@ -23,7 +23,7 @@ class Students_list_db_adapter < Adapter
     )
   end
   
-  def get_k_n_student_short_list(k, n)
+  def get_k_n_student_short_list(k, n, filter = nil)
     start_index = (k - 1) * n + 1
     end_index = start_index + n - 1
     query = "
@@ -44,8 +44,11 @@ class Students_list_db_adapter < Adapter
         birth_date: row['birth_date']
       )
     end
-    short_students = students.map { |student| Student_short.from_student(student) }
 
+    students = filter.apply_filter(students) if filter
+  
+    short_students = students.map { |student| Student_short.from_student(student) }
+  
     selected_list = Data_list_student_short.new(short_students)
     short_students.each_with_index { |_, index| selected_list.select(index) }
     selected_list
@@ -84,8 +87,26 @@ class Students_list_db_adapter < Adapter
     @db.execute_query("DELETE FROM student WHERE id = #{id}")
   end
 
-  def get_student_short_count
-    result = @db.execute_query('SELECT COUNT(*) FROM student')
-    result[0]['count'].to_i
+  def get_student_short_count(filter = nil)
+    query = 'SELECT * FROM student'
+    result = @db.execute_query(query)
+  
+    students = result.map do |row|
+      Student.from_hash(
+        id: row['id'],
+        lastname: row['last_name'],
+        firstname: row['first_name'],
+        surname: row['surname'],
+        phone: row['phone'],
+        email: row['email'],
+        telegram: row['telegram'],
+        github: row['github'],
+        birth_date: row['birth_date']
+      )
+    end
+  
+    filtered_students = filter ? filter.apply_filter(students) : students
+  
+    filtered_students.size
   end
 end

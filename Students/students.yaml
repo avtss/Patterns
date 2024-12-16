@@ -35,3 +35,12 @@
   :email: kuznetsov.nikolay@example.com
   :github: https://github.com/kuznetsov-nikolay
   :birth_date: 2001-03-25
+- :id: 5
+  :lastname: Задикян
+  :firstname: Аветис
+  :surname: Арутюнович
+  :phone:
+  :telegram:
+  :email:
+  :github:
+  :birth_date: 2001-03-25

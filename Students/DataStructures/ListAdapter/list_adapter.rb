@@ -7,8 +7,8 @@ class List_adapter
     @adapter.find_student_by_id(id)
   end
 
-  def get_k_n_student_short_list(k, n)
-    @adapter.get_k_n_student_short_list(k, n)
+  def get_k_n_student_short_list(k, n, filter=nil)
+    @adapter.get_k_n_student_short_list(k, n, filter)
   end
 
   def add_student(student)
@@ -23,7 +23,7 @@ class List_adapter
     @adapter.delete_student_by_id(id)
   end
 
-  def get_student_short_count
-    @adapter.get_student_short_count
+  def get_student_short_count(filter=nil)
+    @adapter.get_student_short_count(filter)
   end
 end

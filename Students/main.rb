@@ -12,54 +12,15 @@ require_relative './Database/DB_connection'
 require_relative './DataStructures/ListAdapter/students_list_adapter'
 require_relative './DataStructures/ListAdapter/students_list_db_adapter'
 require_relative './DataStructures/ListAdapter/list_adapter'
+require_relative './DataStructures/Filter/empty_github_filter'
+require_relative './DataStructures/Filter/find_by_fullname_filter'
+require_relative './DataStructures/Filter/sort_by_fullname_filter'
+require_relative './DataStructures/Filter/sort_by_contact_filter'
+require_relative './DataStructures/Filter/sort_by_github_filter'
 
 
 
 begin
-
-  sttree=Student_tree.new()
-  student1 = Student.new(
-  id: 1,
-  lastname: "Иванов",
-  firstname: "Иван",
-  surname: "Иванович",
-  phone: "+79991234567",
-  telegram: "@ivanov_ivan",
-  email: "ivanov.ivan@example.com",
-  github: "https://github.com/ivanov-ivan",
-  birth_date: "2000-01-15"
-)
-
-student2 = Student.new(
-  id: 2,
-  lastname: "Петров",
-  firstname: "Петр",
-  surname: "Петрович",
-  phone: "+79997654321",
-  telegram: "@petrov_petr",
-  email: "petrov.petr@example.com",
-  github: "https://github.com/petrov-petr",
-  birth_date: "1999-05-10"
-)
-student3 = Student.from_string("3; Сидоров; Сергей; Сергеевич; +79991112233; @sidorov_sergey; sidorov.sergey@example.com; https://github.com/sidorov-sergey; 1998-11-20")
-
-student4 = Student.from_hash(
-  id: 4,
-  lastname: "Кузнецов",
-  firstname: "Николай",
-  surname: "Николаевич",
-  phone: "+79994445566",
-  telegram: "@kuznetsov_nikolay",
-  email: "kuznetsov.nikolay@example.com",
-  github: "https://github.com/kuznetsov-nikolay",
-  birth_date: "2001-03-25"
-)
-  sttree.insert(student1)
-  sttree.insert(student2)
-  sttree.insert(student3)
-  sttree.insert(student4)
-  #puts sttree.select{|s| s.lastname=="Кузнецов"}
-
 
 yamlstrat=YAML_Strategy.new()
 list_adapter1 = List_adapter.new(Students_list_adapter.new(yamlstrat, "students.yaml"))
@@ -70,10 +31,15 @@ student5 = Student.from_hash(
   surname: "Арутюнович",
   birth_date: "2001-03-25"
 )
-list_adapter1.add_student(student5)
-puts "Всего студентов в файле: #{list_adapter1.get_student_short_count}"
+#list_adapter1.add_student(student5)
+#puts "Всего студентов в файле: #{list_adapter1.get_student_short_count}"
 student = list_adapter1.find_student_by_id(1)
-puts "Найден студент: #{student}"
+#puts "Найден студент: #{student}"
+base=Filter.new()
+filter=EmptyGithubFilter.new(base)
+shrt_list = list_adapter1.get_k_n_student_short_list(1, 10, filter)
+puts shrt_list.get_data
+puts list_adapter1.get_student_short_count(filter)
 
 db_config = {
   host: 'localhost', user: 'postgres', password: '1q2w34567', dbname: 'student'
@@ -88,11 +54,12 @@ con = DB_Connection.instance(db_config)
 
 list_adapter2 = List_adapter.new(Students_list_db_adapter.new(con))
 
-puts "Всего студентов в БД: #{list_adapter2.get_student_short_count}"
-student = list_adapter2.find_student_by_id(15)
-puts "Найден студент: #{student}"
+#puts "Всего студентов в БД: #{list_adapter2.get_student_short_count}"
+#student = list_adapter2.find_student_by_id(15)
+#puts "Найден студент: #{student}"
 
-short_list=list_adapter2.get_k_n_student_short_list(2, 10)
+short_list=list_adapter2.get_k_n_student_short_list(2, 10, filter)
+
 puts short_list.get_data
 rescue ArgumentError => e
   puts e.message

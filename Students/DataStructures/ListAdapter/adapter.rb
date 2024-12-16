@@ -3,7 +3,7 @@ class Adapter
       raise NotImplementedError, "Метод не реализован в классе Adapter"
     end
   
-    def get_k_n_student_short_list(k, n)
+    def get_k_n_student_short_list(k, n, filter=nil)
       raise NotImplementedError, "Метод не реализован в классе Adapter"
     end
   
@@ -19,7 +19,7 @@ class Adapter
       raise NotImplementedError, "Метод не реализован в классе Adapter"
     end
   
-    def get_student_count
+    def get_student_count(filter=nil)
       raise NotImplementedError, "Метод не реализован в классе Adapter"
     end
   end

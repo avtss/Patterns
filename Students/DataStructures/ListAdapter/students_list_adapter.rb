@@ -11,8 +11,12 @@ class Students_list_adapter < Adapter
       @students_list.find_student_by_id(id)
     end
   
-    def get_k_n_student_short_list(k, n)
-      @students_list.get_k_n_student_short_list(k, n)
+    def get_k_n_student_short_list(k, n, filter=nil)
+      if filter.nil?
+        @students_list.get_k_n_student_short_list(k, n)
+      else
+        @students_list.get_k_n_student_short_list(k, n, filter)
+      end
     end
   
     def add_student(student)
@@ -30,8 +34,12 @@ class Students_list_adapter < Adapter
       @students_list.save
     end
   
-    def get_student_short_count
-      @students_list.get_student_short_count
+    def get_student_short_count(filter=nil)
+      if filter.nil?
+        @students_list.get_student_short_count
+      else
+        @students_list.get_student_short_count(filter)
+      end
     end
   end
   
