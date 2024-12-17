@@ -6,7 +6,9 @@ class YAML_Strategy < File_strategy
     return [] unless File.exist?(file_path)
 
     file_content = File.read(file_path)
-    YAML.safe_load(file_content, permitted_classes: [Symbol, Date], symbolize_names: true) || []
+    student_data = YAML.safe_load(file_content, permitted_classes: [Symbol, Date], symbolize_names: true) || []
+
+    student_data.map { |data| Student.new(**data) }
   end
 
   def save(file_path, data)

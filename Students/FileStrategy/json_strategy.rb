@@ -6,7 +6,9 @@ class JSON_Strategy < File_strategy
     return [] unless File.exist?(file_path)
 
     file_content = File.read(file_path)
-    JSON.parse(file_content, symbolize_names: true)
+    student_data = JSON.parse(file_content, symbolize_names: true)
+
+    student_data.map { |data| Student.new(**data) }
   end
 
   def save(file_path, data)

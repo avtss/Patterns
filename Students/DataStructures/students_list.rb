@@ -10,8 +10,7 @@ class Students_list
   end
 
   def load()
-    data = @strategy.load(@file_path)
-    @students = data.map { |student_data| Student.new(**student_data) }
+    @students = @strategy.load(@file_path)
   end
   
     def save()
