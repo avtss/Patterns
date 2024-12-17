@@ -1,14 +1,5 @@
 ---
 - :id: 1
-  :lastname: Иванов
-  :firstname: Иван
-  :surname: Иванович
-  :phone: "+71234567890"
-  :telegram: "@ivadsadasn"
-  :email: ivan@example.com
-  :github: https://github.com/ivanov
-  :birth_date: 2004-03-11
-- :id: 2
   :lastname: Петров
   :firstname: Петр
   :surname: Петрович
@@ -17,7 +8,7 @@
   :email:
   :github: https://github.com/petrov
   :birth_date: 2003-08-05
-- :id: 3
+- :id: 2
   :lastname: Сидоров
   :firstname: Сидор
   :surname: Сидорович
@@ -26,7 +17,7 @@
   :email: sidor@example.com
   :github: https://github.com/sidorov
   :birth_date: 2001-11-12
-- :id: 4
+- :id: 3
   :lastname: Кузнецов
   :firstname: Николай
   :surname: Николаевич
@@ -35,7 +26,7 @@
   :email: kuznetsov.nikolay@example.com
   :github: https://github.com/kuznetsov-nikolay
   :birth_date: 2001-03-25
-- :id: 5
+- :id: 4
   :lastname: Задикян
   :firstname: Аветис
   :surname: Арутюнович
@@ -43,4 +34,13 @@
   :telegram:
   :email:
   :github:
+  :birth_date: 2001-03-25
+- :id: 5
+  :lastname: Задикян
+  :firstname: Аветис
+  :surname: Арутюнович
+  :phone: "+71234567890"
+  :telegram:
+  :email: avetis@example.com
+  :github: https://github.com/avtss
   :birth_date: 2001-03-25

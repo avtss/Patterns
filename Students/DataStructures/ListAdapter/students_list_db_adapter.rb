@@ -55,32 +55,40 @@ class Students_list_db_adapter < Adapter
   end
   
   def add_student(student)
-    query = "
-      INSERT INTO student (last_name, first_name, surname, phone, email, telegram, github, birth_date)
-      VALUES ('#{student.lastname}', '#{student.firstname}', '#{student.surname}', 
-              #{student.phone.nil? ? 'NULL' : "'#{student.phone}'"},
-              #{student.email.nil? ? 'NULL' : "'#{student.email}'"},
-              #{student.telegram.nil? ? 'NULL' : "'#{student.telegram}'"},
-              #{student.github.nil? ? 'NULL' : "'#{student.github}'"},
-              '#{student.birth_date}')
-    "
-    @db.execute_query(query)
+    begin
+      query = "
+        INSERT INTO student (last_name, first_name, surname, phone, email, telegram, github, birth_date)
+        VALUES ('#{student.lastname}', '#{student.firstname}', '#{student.surname}', 
+                #{student.phone.nil? ? 'NULL' : "'#{student.phone}'"},
+                #{student.email.nil? ? 'NULL' : "'#{student.email}'"},
+                #{student.telegram.nil? ? 'NULL' : "'#{student.telegram}'"},
+                #{student.github.nil? ? 'NULL' : "'#{student.github}'"},
+                '#{student.birth_date}')
+      "
+      @db.execute_query(query)
+    rescue PG::UniqueViolation => e
+      raise ArgumentError, "Студент с такими контактами уже существует"
+    end
   end
 
   def update_student_by_id(id, updated_student)
-    query = "
-      UPDATE student
-      SET last_name = '#{updated_student.lastname}',
-          first_name = '#{updated_student.firstname}',
-          surname = '#{updated_student.surname}',
-          phone = #{updated_student.phone.nil? ? 'NULL' : "'#{updated_student.phone}'"},
-          email = #{updated_student.email.nil? ? 'NULL' : "'#{updated_student.email}'"},
-          telegram = #{updated_student.telegram.nil? ? 'NULL' : "'#{updated_student.telegram}'"},
-          github = #{updated_student.github.nil? ? 'NULL' : "'#{updated_student.github}'"},
-          birth_date = '#{updated_student.birth_date}'
-      WHERE id = #{id}
-    "
-    @db.execute_query(query)
+    begin
+      query = "
+        UPDATE student
+        SET last_name = '#{updated_student.lastname}',
+            first_name = '#{updated_student.firstname}',
+            surname = '#{updated_student.surname}',
+            phone = #{updated_student.phone.nil? ? 'NULL' : "'#{updated_student.phone}'"},
+            email = #{updated_student.email.nil? ? 'NULL' : "'#{updated_student.email}'"},
+            telegram = #{updated_student.telegram.nil? ? 'NULL' : "'#{updated_student.telegram}'"},
+            github = #{updated_student.github.nil? ? 'NULL' : "'#{updated_student.github}'"},
+            birth_date = '#{updated_student.birth_date}'
+        WHERE id = #{id}
+      "
+      @db.execute_query(query)
+    rescue PG::UniqueViolation => e
+      raise ArgumentError, "Студент с такими контактами уже существует"
+    end
   end
 
   def delete_student_by_id(id)

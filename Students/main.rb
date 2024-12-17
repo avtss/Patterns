@@ -24,16 +24,19 @@ begin
 
 yamlstrat=YAML_Strategy.new()
 list_adapter1 = List_adapter.new(Students_list_adapter.new(yamlstrat, "students.yaml"))
-student5 = Student.from_hash(
+student1 = Student.from_hash(
   id: 5,
   lastname: "Задикян",
   firstname: "Аветис",
   surname: "Арутюнович",
+  phone: "+71234567890",
+  email: "avetis@example.com",
+  github: "https://github.com/avtss",
   birth_date: "2001-03-25"
 )
 #list_adapter1.add_student(student5)
 #puts "Всего студентов в файле: #{list_adapter1.get_student_short_count}"
-student = list_adapter1.find_student_by_id(1)
+#student = list_adapter1.find_student_by_id(1)
 #puts "Найден студент: #{student}"
 base=Filter.new()
 filter=EmptyGithubFilter.new(base)
@@ -53,6 +56,7 @@ con = DB_Connection.instance(db_config)
 #con2 = DB_Connection.instance(db_config2)
 
 list_adapter2 = List_adapter.new(Students_list_db_adapter.new(con))
+list_adapter2.add_student(student1)
 
 #puts "Всего студентов в БД: #{list_adapter2.get_student_short_count}"
 #student = list_adapter2.find_student_by_id(15)
