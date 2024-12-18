@@ -111,6 +111,31 @@ class StudentApp < FXMainWindow
     edit_button = FXButton.new(control_frame, "Изменить")
     delete_button = FXButton.new(control_frame, "Удалить")
     update_button = FXButton.new(control_frame, "Обновить")
+    edit_button.enabled = false
+    delete_button.enabled = false
+
+    @table.connect(SEL_SELECTED) do
+      selected_rows = (@table.selStartRow..@table.selEndRow).to_a
+      selected_count = selected_rows.count { |row| @table.rowSelected?(row) }
+    
+      if selected_count == 0
+        edit_button.enabled = false
+        delete_button.enabled = false
+      elsif selected_count == 1
+        edit_button.enabled = true
+        delete_button.enabled = true
+      else
+        edit_button.enabled = false
+        delete_button.enabled = true
+      end
+    end
+    
+    @table.connect(SEL_DESELECTED) do
+      edit_button.enabled = false
+      delete_button.enabled = false
+    end
+    
+
     #tab2
     tab2 = FXTabItem.new(tab_book, "2")
     FXVerticalFrame.new(tab_book, LAYOUT_FILL).tap do |frame|
