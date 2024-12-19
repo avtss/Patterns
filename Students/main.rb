@@ -17,7 +17,8 @@ require_relative './DataStructures/Filter/sort_by_fullname_filter'
 require_relative './DataStructures/Filter/find_by_git_filter'
 require_relative './DataStructures/Filter/find_by_phone_filter'
 require_relative './DataStructures/Filter/find_by_telegram_filter'
-require_relative './StudentsMVC/student_app'
+require_relative './Views/student_app'
+require_relative './Controllers/student_list_controller'
 require 'fox16'
 
 
@@ -26,14 +27,11 @@ include Fox
 
 
 begin
-db_config = { host: 'localhost', user: 'postgres', password: '1q2w34567', dbname: 'student' }
-  if __FILE__ == $0
-    FXApp.new do |app|
-      StudentApp.new(app, db_config)
-      app.create
-      app.run
-    end
-  end
+  db_config = { host: 'localhost', user: 'postgres', password: '1q2w34567', dbname: 'student' }
+  app = FXApp.new
+  view = StudentApp.new(app, db_config) # Передаем db_config
+  app.create
+  app.run
 rescue ArgumentError => e
   puts e.message
 end

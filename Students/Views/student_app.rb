@@ -8,12 +8,11 @@ require_relative '../DataStructures/Filter/sort_by_fullname_filter'
 include Fox
 
 class StudentApp < FXMainWindow
+  attr_reader :items_per_page, :page_label, :table
+  attr_accessor :current_page
   def initialize(app, db_config)
     super(app, "Список студентов", width: 1200, height: 700)
-    #db connect
-    db_connection = DB_Connection.instance(db_config)
-    db_adapter = Students_list_db_adapter.new(db_connection)
-    @list_adapter = List_adapter.new(db_adapter)
+    @controller = StudentListController.new(self, db_config)
 
     @current_page = 1
     @items_per_page = 20
@@ -161,50 +160,18 @@ class StudentApp < FXMainWindow
   private
 
   def setup_table
-    @table.setTableSize(0, 4)
-
-    @table.setColumnWidth(0, 50)
-    @table.setColumnWidth(1, 200)
-    @table.setColumnWidth(2, 600)
-    @table.setColumnWidth(3, 200)
-    
+    @controller.setup_table
   end
 
   def load_data
-  total_items = @list_adapter.get_student_short_count(@filter)
-  total_pages = (total_items.to_f / @items_per_page).ceil
-
-  update_pagination_label(@current_page, total_pages)
-
-  data_list = @list_adapter.get_k_n_student_short_list(@current_page, @items_per_page, @filter)
-  data_table = data_list.get_data
-
-  @table.setTableSize(data_table.row_count - 1, data_table.col_count)
-
-  column_names = data_table.get_element(0, 0..data_table.col_count - 1)
-  column_names.each_with_index do |name, index|
-    @table.setColumnText(index, name)
+    @controller.load_data
   end
-
-  (1...data_table.row_count).each do |row_index|
-    (0...data_table.col_count).each do |col_index|
-      @table.setItemText(row_index - 1, col_index, data_table.get_element(row_index, col_index).to_s)
-    end
-  end
-end
 
   def update_pagination_label(current_page, total_pages)
-    @page_label.text = "Страница: #{current_page}/#{total_pages}"
+    @controller.update_pagination_label(current_page, total_pages)
   end
 
   def change_page(page)
-    total_items = @list_adapter.get_student_short_count
-    total_pages = (total_items.to_f / @items_per_page).ceil
-
-    new_page = @current_page + page
-    return if new_page < 1 || new_page > total_pages
-
-    @current_page = new_page
-    load_data
+    @controller.change_page(page)
   end
 end
