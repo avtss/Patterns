@@ -95,7 +95,7 @@ class StudentApp < FXMainWindow
     #table
     table_frame = FXHorizontalFrame.new(tab1_frame, LAYOUT_FILL)
     @table = FXTable.new(table_frame, nil, 0, TABLE_COL_SIZABLE | LAYOUT_FILL | TABLE_READONLY | TABLE_NO_COLSELECT)
-    setup_table
+
 
     #pages
     pagination_frame = FXHorizontalFrame.new(tab1_frame, LAYOUT_FILL_X | PACK_UNIFORM_WIDTH)
@@ -112,6 +112,9 @@ class StudentApp < FXMainWindow
     update_button = FXButton.new(control_frame, "Обновить")
     edit_button.enabled = false
     delete_button.enabled = false
+    update_button.connect(SEL_COMMAND) do
+      @controller.refresh_data
+    end
 
     @table.connect(SEL_SELECTED) do
       selected_rows = (@table.selStartRow..@table.selEndRow).to_a
@@ -149,7 +152,7 @@ class StudentApp < FXMainWindow
     quit_button = FXButton.new(self, "Закрыть окно", nil, nil, 0, FRAME_RAISED | LAYOUT_FILL_X)
     quit_button.connect(SEL_COMMAND) { getApp().exit }
 
-    load_data
+    @controller.refresh_data
   end
 
   def create
@@ -157,18 +160,28 @@ class StudentApp < FXMainWindow
     show(PLACEMENT_SCREEN)
   end
 
+  def set_table_params(column_names, whole_entities_count)
+    @table.setTableSize(0, column_names.size)
+    column_names.each_with_index do |name, index|
+      @table.setColumnText(index, name)
+    end
+    total_pages = (whole_entities_count.to_f / @items_per_page).ceil
+    update_pagination(@current_page, total_pages)
+  end
+
+  def set_table_data(data_table)
+    @table.setTableSize(data_table.row_count, data_table.col_count)
+    (0...data_table.row_count).each do |row_index|
+      (0...data_table.col_count).each do |col_index|
+        @table.setItemText(row_index, col_index, data_table.get_element(row_index, col_index).to_s)
+      end
+    end
+  end
+
   private
 
-  def setup_table
-    @controller.setup_table
-  end
-
-  def load_data
-    @controller.load_data
-  end
-
-  def update_pagination_label(current_page, total_pages)
-    @controller.update_pagination_label(current_page, total_pages)
+  def update_pagination(current_page, total_pages)
+    @controller.update_pagination(current_page, total_pages)
   end
 
   def change_page(page)

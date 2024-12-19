@@ -29,7 +29,7 @@ include Fox
 begin
   db_config = { host: 'localhost', user: 'postgres', password: '1q2w34567', dbname: 'student' }
   app = FXApp.new
-  view = StudentApp.new(app, db_config) # Передаем db_config
+  view = StudentApp.new(app, db_config)
   app.create
   app.run
 rescue ArgumentError => e
