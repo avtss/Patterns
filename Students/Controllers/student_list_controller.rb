@@ -2,17 +2,16 @@ class StudentListController
   def initialize(view, db_config)
     @view = view
     @student_list = List_adapter.new(Students_list_db_adapter.new(db_config))
-    @filter = Filter.new
     @data_list_student_short = nil
   end
 
   def refresh_data
     if @data_list_student_short ==nil
-      @data_list_student_short = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page, @filter)
+      @data_list_student_short = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page)
       @data_list_student_short.add_observer(@view)
     end
-    @data_list_student_short.data = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page, @filter).data
-    @data_list_student_short.selected = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page, @filter).selected
+    @data_list_student_short.data = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page).data
+    @data_list_student_short.selected = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page).selected
     @data_list_student_short.count = @student_list.get_student_short_count   
     @data_list_student_short.notify
   end
