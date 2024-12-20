@@ -1,20 +1,21 @@
 class Data_list
-
+    attr_reader :data
+    attr_accessor :selected
     def initialize(elements)
         @column_names = column_names
-        self.data = elements
+        @data = elements
         @selected=[]
     end
 
     def select(number)
-        element = self.data[number]
-        if element && !self.selected.include?(element.id)
-            self.selected << number
+        element = @data[number]
+        if element && !@selected.include?(element.id)
+            @selected << number
         end
     end
 
     def get_selected
-        self.selected.dup
+        @selected.dup
     end
 
     def get_names
@@ -31,6 +32,11 @@ class Data_list
         Data_table.new(result)
     end
 
+    def data=(data)
+        @data = data
+        @selected = []
+    end
+
     private
 
     def column_names
@@ -41,24 +47,4 @@ class Data_list
         raise NotImplementedError, "Метод не реализован в классе Data_list"
     end
 
-    protected
-
-    attr_reader :data
-    attr_accessor :selected
-    
-    def data=(data)
-        @data = data.map { |element| deep_dup(element) }
-    end
-
-    def deep_dup(element)
-        if element.is_a?(Array)
-            element.map { |sub_element| deep_dup(sub_element) }
-        else
-            begin
-                element.dup
-            rescue
-                element
-            end
-        end
-    end
 end
