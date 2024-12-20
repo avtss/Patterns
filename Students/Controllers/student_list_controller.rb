@@ -7,6 +7,7 @@ class StudentListController
 
   def refresh_data
     @data_list_student_short = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page, @filter)
+    @data_list_student_short.count = @student_list.get_student_short_count
     @data_list_student_short.add_observer(@view)
     @data_list_student_short.notify
   end

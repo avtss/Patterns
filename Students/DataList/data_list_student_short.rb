@@ -3,6 +3,7 @@ require_relative 'data_table'
 
 
 class Data_list_student_short < Data_list
+    attr_accessor :count
     def initialize(elements)
         super(elements)
         @observers = []
@@ -18,7 +19,7 @@ class Data_list_student_short < Data_list
 
     def notify
         @observers.each do |observer|
-          observer.set_table_params(column_names, data.size)
+          observer.set_table_params(column_names, @count)
           observer.set_table_data(get_data)
         end
     end
