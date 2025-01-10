@@ -22,6 +22,7 @@ CREATE TABLE Patient (
     lastname VARCHAR(50) NOT NULL,
     firstname VARCHAR(50) NOT NULL,
     surname VARCHAR(50),
+    birthdate DATE NOT NULL,
     phone VARCHAR(15),
     card_number VARCHAR(20) UNIQUE,
     diagnosis VARCHAR(255),
