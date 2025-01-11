@@ -16,7 +16,7 @@ class PatientsListDBAdapter < Adapter
       firstname: row['firstname'],
       surname: row['surname'],
       phone: row['phone'],
-      birth_date: row['birthdate']
+      birth_date: row['birthdate'],
       diagnosis: row['diagnosis'],
       doctor_id: row['doctor_id']
     )
@@ -37,7 +37,7 @@ class PatientsListDBAdapter < Adapter
         firstname: row['firstname'],
         surname: row['surname'],
         phone: row['phone'],
-        birth_date: row['birthdate']
+        birth_date: row['birthdate'],
         diagnosis: row['diagnosis'],
         doctor_id: row['doctor_id']
       )
@@ -73,9 +73,7 @@ class PatientsListDBAdapter < Adapter
             firstname = '#{firstname}',
             surname = '#{surname}',
             phone = #{phone.nil? ? 'NULL' : "'#{phone}'"},
-            email = #{email.nil? ? 'NULL' : "'#{email}'"},
             birthdate = #{birth_date.nil? ? 'NULL' : "'#{birth_date}'"},
-            phone = #{phone.nil? ? 'NULL' : "'#{phone}'"},
             card_number = #{card_number.nil? ? 'NULL' : "'#{card_number}'"},
             diagnosis = #{diagnosis.nil? ? 'NULL' : "'#{diagnosis}'"},
             doctor_id = #{doctor_id.nil? ? 'NULL' : "#{doctor_id}"}
@@ -96,15 +94,13 @@ class PatientsListDBAdapter < Adapter
     result = @db.execute_query(query)
   
     patients = result.map do |row|
-      patient.from_hash(
+      Patient.from_hash(
         id: row['id'],
         lastname: row['last_name'],
         firstname: row['first_name'],
         surname: row['surname'],
         phone: row['phone'],
         email: row['email'],
-        telegram: row['telegram'],
-        github: row['github'],
         birth_date: row['birth_date']
       )
     end
