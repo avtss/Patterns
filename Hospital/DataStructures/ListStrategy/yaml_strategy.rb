@@ -1,7 +1,7 @@
 require 'yaml'
 require_relative 'file_strategy'
 
-class YAML_Strategy < File_strategy
+class YAML_Strategy < FileStrategy
   def load(file_path)
     return [] unless File.exist?(file_path)
 
