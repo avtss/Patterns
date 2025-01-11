@@ -10,7 +10,7 @@ class PatientShort < Human
   end
 
   def self.from_patient(patient)
-    new(patient.fullname, patient.id, patient.phone, patient.card_number)
+    new(patient.fullname, id: patient.id, phone: patient.phone, card_number: patient.card_number)
   end
 
   def self.from_string(id, input)

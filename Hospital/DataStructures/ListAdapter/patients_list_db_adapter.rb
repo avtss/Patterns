@@ -6,16 +6,17 @@ class PatientsListDBAdapter < Adapter
   end
   
   def find_patient_by_id(id)
-    result = @db.execute_query("SELECT * FROM patient WHERE id = #{id}")
+    result = @db.execute_query("SELECT * FROM patient WHERE patient_id = #{id}")
     return nil if result.ntuples == 0
     row = result[0]
   
     Patient.from_hash(
-      id: row['id'],
+      id: row['patient_id'],
       lastname: row['lastname'],
       firstname: row['firstname'],
       surname: row['surname'],
       phone: row['phone'],
+      card_number: row['card_number'],
       birth_date: row['birthdate'],
       diagnosis: row['diagnosis'],
       doctor_id: row['doctor_id']
@@ -23,28 +24,28 @@ class PatientsListDBAdapter < Adapter
   end
   
   def get_k_n_patient_short_list(k, n)
-    start_index = (k - 1) * n + 1
-    end_index = start_index + n - 1
+    offset = (k - 1) * n
     query = "
-      SELECT * FROM patient
-      WHERE id BETWEEN #{start_index} AND #{end_index}
+    SELECT * FROM patient
+    ORDER BY patient_id
+    LIMIT #{n} OFFSET #{offset}
     "
+    
     result = @db.execute_query(query)
     patients = result.map do |row|
       Patient.from_hash(
-        id: row['id'],
+        id: row['patient_id'],
         lastname: row['lastname'],
         firstname: row['firstname'],
         surname: row['surname'],
         phone: row['phone'],
+        card_number: row['card_number'],
         birth_date: row['birthdate'],
         diagnosis: row['diagnosis'],
         doctor_id: row['doctor_id']
       )
     end
-  
     short_patients = patients.map { |patient| PatientShort.from_patient(patient) }
-  
     selected_list = DataListPatientShort.new(short_patients)
     short_patients.each_with_index { |_, index| selected_list.select(index) }
     selected_list
@@ -95,13 +96,15 @@ class PatientsListDBAdapter < Adapter
   
     patients = result.map do |row|
       Patient.from_hash(
-        id: row['id'],
+        id: row['patient_id'],
         lastname: row['last_name'],
         firstname: row['first_name'],
         surname: row['surname'],
         phone: row['phone'],
-        email: row['email'],
-        birth_date: row['birth_date']
+        birth_date: row['birth_date'],
+        card_number: row['card_number'],
+        diagnosis: row['diagnosis'],
+        doctor_id: row['doctor_id']
       )
     end
   

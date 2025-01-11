@@ -7,7 +7,7 @@ class Human
     self.card_number = card_number if card_number
 	end
   
-  PHONE_REGEX = /^\+7\d{10}$/
+  PHONE_REGEX = /^8\d{10}$/
   CARD_NUMBER_REGEX = /^\d{7}$/
 
   def id=(val)
@@ -43,7 +43,7 @@ class Human
   end
 
   def self.valid_card_number?(card_number)
-    phone =~ CARD_NUMBER_REGEX
+    card_number =~ CARD_NUMBER_REGEX
   end
 
   def self.valid_name?(name)

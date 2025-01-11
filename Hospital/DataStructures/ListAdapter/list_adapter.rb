@@ -1,4 +1,4 @@
-class List_adapter
+class ListAdapter
   def initialize(adapter)
     @adapter=adapter
   end
