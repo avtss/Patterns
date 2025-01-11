@@ -50,8 +50,4 @@ class Human
     raise NotImplementedError, "Метод не реализован в классе Human"
   end
 
-  def self.valid_birthdate?(birthdate)
-		raise NotImplementedError, "Метод не реализован в классе Human"
-	end
-
 end
