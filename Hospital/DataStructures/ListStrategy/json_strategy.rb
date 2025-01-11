@@ -19,9 +19,10 @@ class JSON_Strategy < FileStrategy
         firstname: patient.firstname,
         surname: patient.surname,
         phone: patient.phone,
-        card_number: patient.card_number
-        birth_date: patient.birth_date
-        diagnosis: patient.diagnosis
+        card_number: patient.card_number,
+        birth_date: patient.birth_date,
+        diagnosis: patient.diagnosis,
+        doctor_idL = patient.doctor_id
       }
     end
     File.open(file_path, 'w') { |file| file.write(JSON.pretty_generate(serialized_data)) }
